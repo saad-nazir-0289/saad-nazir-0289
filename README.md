@@ -26,10 +26,10 @@
 </p>
 
 <p align="center">
-  <a href="./assets/saad-nazir-resume.md">
+  <a href="./M.%20Saad%20Nazir%20CV%202026.pdf">
     <img src="https://img.shields.io/badge/View%20Resume-111111?style=for-the-badge&logo=readthedocs&logoColor=ffd166&labelColor=2b0000&color=ff5a1f" alt="View resume" />
   </a>
-  <a href="https://raw.githubusercontent.com/saad-nazir-0289/saad-nazir-0289/main/assets/saad-nazir-resume.md">
+  <a href="https://raw.githubusercontent.com/saad-nazir-0289/saad-nazir-0289/main/M.%20Saad%20Nazir%20CV%202026.pdf">
     <img src="https://img.shields.io/badge/Download%20Resume-111111?style=for-the-badge&logo=googledrive&logoColor=ffd166&labelColor=2b0000&color=d62828" alt="Download resume" />
   </a>
 </p>
