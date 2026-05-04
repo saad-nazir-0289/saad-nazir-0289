@@ -16,7 +16,7 @@
   <img src="https://img.shields.io/badge/Mindset-Relentless-black?style=for-the-badge&logo=dependabot&logoColor=ffb347&labelColor=1a0000&color=ff5a1f" alt="Mindset badge" />
   <img src="https://img.shields.io/badge/Focus-AI%20%26%20Automation-black?style=for-the-badge&logo=openai&logoColor=ffd166&labelColor=2b0000&color=ff6a00" alt="Focus badge" />
   <img src="https://img.shields.io/badge/Mode-Builder%20Under%20Pressure-black?style=for-the-badge&logo=firefoxbrowser&logoColor=ffd166&labelColor=240000&color=d62828" alt="Mode badge" />
-  <img src="https://img.shields.io/badge/PROFILE%20HEAT-497-111111?style=for-the-badge&logo=apachespark&logoColor=ffd166&labelColor=2b0000&color=ff5a1f" alt="Profile heat" />
+  <img src="https://komarev.com/ghpvc/?username=saad-nazir-0289&style=for-the-badge&color=ff5a1f&label=PROFILE+HEAT" alt="Profile heat" />
 </p>
 
 <p align="center">
