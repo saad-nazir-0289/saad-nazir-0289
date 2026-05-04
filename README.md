@@ -16,7 +16,7 @@
   <img src="https://img.shields.io/badge/Mindset-Relentless-black?style=for-the-badge&logo=dependabot&logoColor=ffb347&labelColor=1a0000&color=ff5a1f" alt="Mindset badge" />
   <img src="https://img.shields.io/badge/Focus-AI%20%26%20Automation-black?style=for-the-badge&logo=openai&logoColor=ffd166&labelColor=2b0000&color=ff6a00" alt="Focus badge" />
   <img src="https://img.shields.io/badge/Mode-Builder%20Under%20Pressure-black?style=for-the-badge&logo=firefoxbrowser&logoColor=ffd166&labelColor=240000&color=d62828" alt="Mode badge" />
-  <img src="https://img.shields.io/badge/PROFILE%20HEAT-497%2F500-111111?style=for-the-badge&logo=apachespark&logoColor=ffd166&labelColor=2b0000&color=ff5a1f" alt="Profile heat" />
+  <img src="https://img.shields.io/badge/PROFILE%20HEAT-497-111111?style=for-the-badge&logo=apachespark&logoColor=ffd166&labelColor=2b0000&color=ff5a1f" alt="Profile heat" />
 </p>
 
 <p align="center">
@@ -93,14 +93,12 @@ A recent build in the mix that reflects my bias toward shipping practical tools 
 
 ## Live Metrics From The Heat Zone
 
-<div align="center">
+<p align="center">
   <img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=saad-nazir-0289&theme=github_dark" alt="GitHub stats" />
   <img height="170" src="https://github-readme-streak-stats.herokuapp.com/?user=saad-nazir-0289&hide_border=true&background=0D0202&ring=FF6A00&fire=FFB347&currStreakLabel=FFD166&sideNums=FFE8CC&currStreakNum=FFFFFF&sideLabels=FFC38B&dates=FF9E66" alt="GitHub streak" />
-</div>
-
-<div align="center">
-  <img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=saad-nazir-0289&theme=github_dark" alt="Top languages" />
-</div>
+  <img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=saad-nazir-0289&theme=github_dark" alt="Top languages by repo" />
+  <img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=saad-nazir-0289&theme=github_dark" alt="Top languages by commit" />
+</p>
 
 <div align="center">
   <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=saad-nazir-0289&bg_color=0d0202&color=ffd166&line=ff6a00&point=ffb347&area=true&hide_border=true&title_color=ffffff" alt="Activity graph" />
