@@ -25,14 +25,7 @@
   I like turning rough ideas into sharp systems, shipping products with heat, and building tech that actually does something in the real world.
 </p>
 
-<p align="center">
-  <a href="./M.%20Saad%20Nazir%20CV%202026.pdf">
-    <img src="https://img.shields.io/badge/View%20Resume-111111?style=for-the-badge&logo=readthedocs&logoColor=ffd166&labelColor=2b0000&color=ff5a1f" alt="View resume" />
-  </a>
-  <a href="https://raw.githubusercontent.com/saad-nazir-0289/saad-nazir-0289/main/M.%20Saad%20Nazir%20CV%202026.pdf">
-    <img src="https://img.shields.io/badge/Download%20Resume-111111?style=for-the-badge&logo=googledrive&logoColor=ffd166&labelColor=2b0000&color=d62828" alt="Download resume" />
-  </a>
-</p>
+<p align="center"><a href="./M.%20Saad%20Nazir%20CV%202026.pdf"><img src="https://img.shields.io/badge/View%20Resume-111111?style=for-the-badge&logo=readthedocs&logoColor=ffd166&labelColor=2b0000&color=ff5a1f" alt="View resume" /></a>&nbsp;<a href="https://raw.githubusercontent.com/saad-nazir-0289/saad-nazir-0289/main/M.%20Saad%20Nazir%20CV%202026.pdf"><img src="https://img.shields.io/badge/Download%20Resume-111111?style=for-the-badge&logo=googledrive&logoColor=ffd166&labelColor=2b0000&color=d62828" alt="Download resume" /></a></p>
 
 ---
 
