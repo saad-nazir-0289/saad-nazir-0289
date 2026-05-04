@@ -94,12 +94,12 @@ A recent build in the mix that reflects my bias toward shipping practical tools 
 ## Live Metrics From The Heat Zone
 
 <div align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=saad-nazir-0289&show_icons=true&hide_border=true&bg_color=0d0202&title_color=ff7b00&text_color=ffe8cc&icon_color=ffd166&ring_color=ff5a1f" alt="GitHub stats" />
+  <img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=saad-nazir-0289&theme=github_dark" alt="GitHub stats" />
   <img height="170" src="https://github-readme-streak-stats.herokuapp.com/?user=saad-nazir-0289&hide_border=true&background=0D0202&ring=FF6A00&fire=FFB347&currStreakLabel=FFD166&sideNums=FFE8CC&currStreakNum=FFFFFF&sideLabels=FFC38B&dates=FF9E66" alt="GitHub streak" />
 </div>
 
 <div align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=saad-nazir-0289&layout=compact&hide_border=true&bg_color=0d0202&title_color=ff7b00&text_color=ffe8cc" alt="Top languages" />
+  <img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=saad-nazir-0289&theme=github_dark" alt="Top languages" />
 </div>
 
 <div align="center">
