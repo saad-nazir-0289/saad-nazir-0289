@@ -1,0 +1,54 @@
+<svg width="1200" height="240" viewBox="0 0 1200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#090101"/>
+      <stop offset="0.5" stop-color="#1D0500"/>
+      <stop offset="1" stop-color="#090101"/>
+    </linearGradient>
+    <linearGradient id="strokeA" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5A0B00"/>
+      <stop offset="0.5" stop-color="#FF6A00"/>
+      <stop offset="1" stop-color="#FFD166"/>
+    </linearGradient>
+    <radialGradient id="glowL" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(210 110) rotate(25) scale(260 120)">
+      <stop stop-color="#FF7B00" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#FF7B00" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowR" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(950 120) rotate(-15) scale(290 140)">
+      <stop stop-color="#D62828" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#D62828" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="240" rx="28" fill="url(#bg)"/>
+  <rect x="12" y="12" width="1176" height="216" rx="20" stroke="url(#strokeA)" stroke-width="2"/>
+  <rect x="40" y="38" width="160" height="18" rx="9" fill="#2A0B00"/>
+  <rect x="40" y="72" width="210" height="10" rx="5" fill="#4D1400"/>
+  <rect x="40" y="92" width="184" height="10" rx="5" fill="#4D1400"/>
+  <rect x="40" y="112" width="236" height="10" rx="5" fill="#4D1400"/>
+  <rect x="330" y="48" width="220" height="60" rx="12" fill="#130303" stroke="#7F0909"/>
+  <rect x="355" y="72" width="56" height="12" rx="6" fill="#FFD166"/>
+  <rect x="418" y="72" width="108" height="12" rx="6" fill="#FF6A00"/>
+  <rect x="580" y="48" width="280" height="60" rx="12" fill="#130303" stroke="#B22222"/>
+  <rect x="606" y="72" width="74" height="12" rx="6" fill="#FF9F1C"/>
+  <rect x="688" y="72" width="146" height="12" rx="6" fill="#FFE8CC"/>
+  <rect x="890" y="48" width="250" height="60" rx="12" fill="#130303" stroke="#FF6A00"/>
+  <rect x="916" y="72" width="52" height="12" rx="6" fill="#FFD166"/>
+  <rect x="976" y="72" width="138" height="12" rx="6" fill="#FF5A1F"/>
+  <rect x="40" y="154" width="1100" height="1" fill="#57210A"/>
+  <rect x="40" y="176" width="120" height="12" rx="6" fill="#FF5A1F"/>
+  <rect x="172" y="176" width="88" height="12" rx="6" fill="#D62828"/>
+  <rect x="272" y="176" width="102" height="12" rx="6" fill="#FFD166"/>
+  <rect x="386" y="176" width="76" height="12" rx="6" fill="#B22222"/>
+  <rect x="474" y="176" width="132" height="12" rx="6" fill="#FF7B00"/>
+  <rect x="618" y="176" width="95" height="12" rx="6" fill="#FFE8CC"/>
+  <rect x="725" y="176" width="68" height="12" rx="6" fill="#FF5A1F"/>
+  <rect x="805" y="176" width="124" height="12" rx="6" fill="#D62828"/>
+  <rect x="941" y="176" width="86" height="12" rx="6" fill="#FFD166"/>
+  <rect x="1039" y="176" width="101" height="12" rx="6" fill="#FF6A00"/>
+  <circle cx="180" cy="120" r="74" fill="url(#glowL)"/>
+  <circle cx="972" cy="118" r="88" fill="url(#glowR)"/>
+  <path d="M996 172C1007.5 159.5 1020.5 139.9 1018.5 125.5C1016.5 111.1 1008.5 102.5 1009.5 91.5C1010.5 80.5 1020.5 71 1024.5 60C1029.5 74 1043.5 81.5 1045 97.5C1046.5 113.5 1039.5 125.5 1031.5 137.5C1024.5 148.5 1016 161.5 1023.5 178C1013.5 176.5 1003.5 175 996 172Z" fill="#FF7B00" fill-opacity="0.92"/>
+  <path d="M1036 188C1043 179.5 1050.5 165.8 1049 155.5C1047.5 145.2 1041.5 139 1042 131C1042.5 123 1048.5 116 1051 108C1054.5 118.5 1063.5 124 1064.5 135.5C1065.5 147 1061 155.5 1055.5 164.5C1050.5 172 1045 181 1049.5 192.5C1042.5 191.5 1038.5 190 1036 188Z" fill="#FFD166" fill-opacity="0.94"/>
+  <path d="M147 176C157 164 168 145.1 166.5 131.5C165 117.9 158.5 109.8 159 99.5C159.5 89.2 167.5 80.5 171 70.5C175.5 83.5 187.5 90.5 189 105.5C190.5 120.5 184.5 131.8 177.5 143.5C171 154.4 163 167 169.5 182.5C161 181 152.5 179.5 147 176Z" fill="#D62828" fill-opacity="0.88"/>
+  <path d="M177 189C182 182 187.5 170.8 186.5 162.5C185.5 154.2 181.5 149.4 182 143C182.5 136.6 186.5 131 189 124.5C191.5 133.5 198 138 198.5 147.5C199 157 195.5 164 191.5 171.5C187.5 178 183.5 185.5 187 195C181.5 194.4 178.5 192.3 177 189Z" fill="#FFD166" fill-opacity="0.96"/>
+</svg>
