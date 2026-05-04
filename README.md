@@ -94,7 +94,7 @@ A recent build in the mix that reflects my bias toward shipping practical tools 
 ## Live Metrics From The Heat Zone
 
 <p align="center">
-  <img width="590" height="240" src="https://github-readme-streak-stats.herokuapp.com/?user=saad-nazir-0289&hide_border=true&background=0D0202&ring=FF6A00&fire=FFB347&currStreakLabel=FFD166&sideNums=FFE8CC&currStreakNum=FFFFFF&sideLabels=FFC38B&dates=FF9E66" alt="GitHub streak" /><img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=saad-nazir-0289&theme=github_dark" alt="GitHub stats" /><img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=saad-nazir-0289&theme=github_dark" alt="Top languages by repo" />
+  <img width="585" height="240" src="https://github-readme-streak-stats.herokuapp.com/?user=saad-nazir-0289&hide_border=true&background=0D0202&ring=FF6A00&fire=FFB347&currStreakLabel=FFD166&sideNums=FFE8CC&currStreakNum=FFFFFF&sideLabels=FFC38B&dates=FF9E66" alt="GitHub streak" /><img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=saad-nazir-0289&theme=github_dark" alt="GitHub stats" /><img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=saad-nazir-0289&theme=github_dark" alt="Top languages by repo" />
 </p>
 
 <div align="center">
