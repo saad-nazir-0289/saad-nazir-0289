@@ -93,11 +93,19 @@ A recent build in the mix that reflects my bias toward shipping practical tools 
 
 ## Live Metrics From The Heat Zone
 
-<p align="center">
-  <img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=saad-nazir-0289&theme=github_dark" alt="GitHub stats" />
-  <img height="170" src="https://github-readme-streak-stats.herokuapp.com/?user=saad-nazir-0289&hide_border=true&background=0D0202&ring=FF6A00&fire=FFB347&currStreakLabel=FFD166&sideNums=FFE8CC&currStreakNum=FFFFFF&sideLabels=FFC38B&dates=FF9E66" alt="GitHub streak" />
-  <img height="170" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=saad-nazir-0289&theme=github_dark" alt="Top languages by repo" />
-</p>
+<table align="center">
+  <tr>
+    <td align="center" valign="top">
+      <img width="320" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=saad-nazir-0289&theme=github_dark" alt="GitHub stats" />
+    </td>
+    <td align="center" valign="top">
+      <img width="320" src="https://github-readme-streak-stats.herokuapp.com/?user=saad-nazir-0289&hide_border=true&background=0D0202&ring=FF6A00&fire=FFB347&currStreakLabel=FFD166&sideNums=FFE8CC&currStreakNum=FFFFFF&sideLabels=FFC38B&dates=FF9E66" alt="GitHub streak" />
+    </td>
+    <td align="center" valign="top">
+      <img width="320" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=saad-nazir-0289&theme=github_dark" alt="Top languages by repo" />
+    </td>
+  </tr>
+</table>
 
 <div align="center">
   <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=saad-nazir-0289&bg_color=0d0202&color=ffd166&line=ff6a00&point=ffb347&area=true&hide_border=true&title_color=ffffff" alt="Activity graph" />
