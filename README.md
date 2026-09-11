@@ -44,13 +44,7 @@
 
 <hr/>
 
-<p><img src="assets/about-strip.svg" width="100%" alt="A little about me — curious by nature, practical by choice." /></p>
-
-<p align="center">
-  <img src="assets/about-approach-compact.svg" width="210" alt="THE APPROACH: Pre-med turned computer scientist. Drawn to making things work. Understand the business constraint. Compare tradeoffs. Build a practical path to delivery. Full-stack development, applied AI, automation, and teaching." />
-  <img src="assets/about-education-compact.svg" width="210" alt="EDUCATION: BS Computer Science University of Central Punjab 2023–2027 3.92 / 4.00 CGPA 100% merit scholarship" />
-  <img src="assets/about-leadership-compact.svg" width="210" alt="LEADERSHIP: Marketing Director Hult Prize · UCP On-Campus Hackathon Director IEEE Computer Society UCP Student Chapter" />
-</p>
+<p><img src="assets/about-strip-complete.svg" width="100%" alt="A little about me. Pre-med turned computer scientist. Understand constraints, compare tradeoffs, and build a practical path to delivery across full-stack, applied AI, automation, and teaching. BS Computer Science, University of Central Punjab, 2023–2027. 3.92/4.00 CGPA, 100% merit scholarship. Marketing Director, Hult Prize UCP On-Campus. Hackathon Director, IEEE Computer Society UCP Student Chapter." /></p>
 
 <p align="center">
   <a href="https://saadnazir.msndev.workers.dev/journey/"><img src="assets/links/journey.svg" alt="My journey" width="132" height="44" /></a>

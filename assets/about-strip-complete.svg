@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="620" viewBox="0 0 720 620" role="img" aria-labelledby="title desc">
+<title id="title">A little about me</title><desc id="desc">Saad Nazir's approach, education and leadership.</desc>
+<rect width="720" height="620" rx="16" fill="#edf0e8"/><rect width="6" height="620" rx="3" fill="#b94424"/>
+<g font-family="Arial,Helvetica,sans-serif" fill="#23231f">
+<text x="32" y="58" font-family="Georgia,serif" font-size="36">A little about me<tspan fill="#b94424">.</tspan></text>
+<text x="34" y="94" font-size="19" fill="#62645e">Curious by nature. Practical by choice.</text>
+<path d="M34 117H686M34 299H686M34 437H686" stroke="#cdd3c5"/>
+<g font-size="14" font-weight="700" letter-spacing="1.5" fill="#b94424">
+<text x="34" y="150">01 / THE APPROACH</text><text x="34" y="332">02 / EDUCATION</text><text x="34" y="470">03 / LEADERSHIP</text></g>
+<g font-size="20">
+<text x="34" y="185">Pre-med turned computer scientist.</text>
+<text x="34" y="214">Drawn to making things work.</text>
+<text x="34" y="249">Understand the constraint. Compare tradeoffs. Build a practical</text>
+<text x="34" y="277">path to delivery: full-stack, applied AI, automation, and teaching.</text>
+<text x="34" y="368" font-weight="600">BS Computer Science</text>
+<text x="34" y="397">University of Central Punjab · 2023–2027</text>
+<text x="34" y="425">3.92 / 4.00 CGPA · 100% merit scholarship</text>
+<text x="34" y="506" font-weight="600">Marketing Director</text>
+<text x="34" y="533">Hult Prize · UCP On-Campus</text>
+<text x="34" y="569" font-weight="600">Hackathon Director</text>
+<text x="34" y="596">IEEE Computer Society · UCP Student Chapter</text>
+</g></g></svg>
