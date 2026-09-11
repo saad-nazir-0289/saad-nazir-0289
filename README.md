@@ -44,9 +44,10 @@
 
 <hr/>
 
-<p><img src="assets/about-strip-complete.svg" width="100%" alt="A little about me. Pre-med turned computer scientist. Understand constraints, compare tradeoffs, and build a practical path to delivery across full-stack, applied AI, automation, and teaching. BS Computer Science, University of Central Punjab, 2023–2027. 3.92/4.00 CGPA, 100% merit scholarship. Marketing Director, Hult Prize UCP On-Campus. Hackathon Director, IEEE Computer Society UCP Student Chapter." /></p>
+<p><img src="assets/about-strip.svg" width="100%" alt="A little about me — curious by nature, practical by choice." /></p>
 
 <p align="center">
+  <a href="https://saadnazir.msndev.workers.dev/#about"><img src="assets/links/about.svg" alt="About" width="104" height="44" /></a>
   <a href="https://saadnazir.msndev.workers.dev/journey/"><img src="assets/links/journey.svg" alt="My journey" width="132" height="44" /></a>
   <a href="https://saadnazir.msndev.workers.dev/certifications/"><img src="assets/links/certifications.svg" alt="Certifications" width="144" height="44" /></a>
 </p>
