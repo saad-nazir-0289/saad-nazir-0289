@@ -34,31 +34,23 @@
 <td>MERN<br/>GPT-4o-mini<br/>Gmail API</td>
 </tr>
 <tr>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/view-project.svg" width="100" alt="View Mill Ledger" /></a></td>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/view-project.svg" width="100" alt="View UCP Noticeboard" /></a></td>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/"><img src="assets/links/view-project.svg" width="100" alt="View Opportunity Inbox Copilot" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/view-project.svg" width="116" alt="Case study: Mill Ledger" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/view-project.svg" width="116" alt="Case study: UCP Noticeboard" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/"><img src="assets/links/view-project.svg" width="116" alt="Case study: Opportunity Inbox Copilot" /></a></td>
 </tr>
 </table>
 
-<p><a href="https://saadnazir.msndev.workers.dev/projects/"><img src="assets/links/projects.svg" alt="All projects" width="140" height="44" /></a></p>
+<p align="center"><a href="https://saadnazir.msndev.workers.dev/projects/"><img src="assets/links/projects.svg" alt="All projects" width="140" height="44" /></a></p>
 
 <hr/>
 
 <p><img src="assets/about-strip.svg" width="100%" alt="A little about me — curious by nature, practical by choice." /></p>
 
-<p align="left">Pre-med turned computer scientist. Drawn to the work of making things work.</p>
-
-<p align="left">I start with the business constraint, compare the tradeoffs, and build a practical path to delivery. My work spans full-stack development, applied AI, automation, and teaching.</p>
-
-<p align="left"><strong>BS Computer Science</strong><br/>
-University of Central Punjab · 2023–2027<br/>
-3.92 / 4.00 CGPA · 100% merit scholarship</p>
-
-<p align="left"><strong>Marketing Director</strong><br/>
-Hult Prize · UCP On-Campus</p>
-
-<p align="left"><strong>Hackathon Director</strong><br/>
-IEEE Computer Society · UCP Student Chapter</p>
+<p align="center">
+  <img src="assets/about-approach.svg" width="280" alt="THE APPROACH: Pre-med turned computer scientist. Drawn to making things work. Understand the business constraint. Compare tradeoffs. Build a practical path to delivery. Full-stack development, applied AI, automation, and teaching." />
+  <img src="assets/about-education.svg" width="280" alt="EDUCATION: BS Computer Science University of Central Punjab 2023–2027 3.92 / 4.00 CGPA 100% merit scholarship" />
+  <img src="assets/about-leadership.svg" width="280" alt="LEADERSHIP: Marketing Director Hult Prize · UCP On-Campus Hackathon Director IEEE Computer Society UCP Student Chapter" />
+</p>
 
 <p align="left">
   <a href="https://saadnazir.msndev.workers.dev/journey/"><img src="assets/links/journey.svg" alt="My journey" width="132" height="44" /></a>
@@ -67,9 +59,9 @@ IEEE Computer Society · UCP Student Chapter</p>
 
 <hr/>
 
-<h2>Tools I build with</h2>
+<h2 align="center">Tools I build with</h2>
 
-<p>
+<p align="center">
   <img src="https://skillicons.dev/icons?i=python&amp;theme=light" width="44" height="44" alt="python" />
   <img src="https://skillicons.dev/icons?i=js&amp;theme=light" width="44" height="44" alt="JavaScript" />
   <img src="https://skillicons.dev/icons?i=react&amp;theme=light" width="44" height="44" alt="react" />
@@ -88,7 +80,7 @@ IEEE Computer Society · UCP Student Chapter</p>
   <img src="https://skillicons.dev/icons?i=vscode&amp;theme=light" width="44" height="44" alt="VS Code" />
 </p>
 
-<p align="left"><strong>Full-stack:</strong> React, Node.js, FastAPI, PostgreSQL, MongoDB<br/>
+<p align="center"><strong>Full-stack:</strong> React, Node.js, FastAPI, PostgreSQL, MongoDB<br/>
 <strong>Applied AI:</strong> LLMs, agents, n8n<br/>
 <strong>Delivery:</strong> Docker, Git, Electron, PWAs</p>
 
