@@ -34,9 +34,9 @@
 <td>MERN<br/>GPT-4o-mini<br/>Gmail API</td>
 </tr>
 <tr>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/view-project.svg" width="116" alt="Case study: Mill Ledger" /></a></td>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/view-project.svg" width="116" alt="Case study: UCP Noticeboard" /></a></td>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/"><img src="assets/links/view-project.svg" width="116" alt="Case study: Opportunity Inbox Copilot" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/case-study-white.svg" width="116" alt="Case study: Mill Ledger" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study-white.svg" width="116" alt="Case study: UCP Noticeboard" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/"><img src="assets/links/case-study-white.svg" width="116" alt="Case study: Opportunity Inbox Copilot" /></a></td>
 </tr>
 </table>
 
@@ -47,9 +47,9 @@
 <p><img src="assets/about-strip.svg" width="100%" alt="A little about me — curious by nature, practical by choice." /></p>
 
 <p align="center">
-  <img src="assets/about-approach.svg" width="280" alt="THE APPROACH: Pre-med turned computer scientist. Drawn to making things work. Understand the business constraint. Compare tradeoffs. Build a practical path to delivery. Full-stack development, applied AI, automation, and teaching." />
-  <img src="assets/about-education.svg" width="280" alt="EDUCATION: BS Computer Science University of Central Punjab 2023–2027 3.92 / 4.00 CGPA 100% merit scholarship" />
-  <img src="assets/about-leadership.svg" width="280" alt="LEADERSHIP: Marketing Director Hult Prize · UCP On-Campus Hackathon Director IEEE Computer Society UCP Student Chapter" />
+  <img src="assets/about-approach-compact.svg" width="210" alt="THE APPROACH: Pre-med turned computer scientist. Drawn to making things work. Understand the business constraint. Compare tradeoffs. Build a practical path to delivery. Full-stack development, applied AI, automation, and teaching." />
+  <img src="assets/about-education-compact.svg" width="210" alt="EDUCATION: BS Computer Science University of Central Punjab 2023–2027 3.92 / 4.00 CGPA 100% merit scholarship" />
+  <img src="assets/about-leadership-compact.svg" width="210" alt="LEADERSHIP: Marketing Director Hult Prize · UCP On-Campus Hackathon Director IEEE Computer Society UCP Student Chapter" />
 </p>
 
 <p align="left">
