@@ -17,41 +17,34 @@
 
 <h2>Selected work</h2>
 
-<h3>Mill Ledger</h3>
-<p align="left"><em>Business software / Offline-first</em></p>
+<table>
+<tr>
+<th width="33%">Mill Ledger</th>
+<th width="33%">UCP Noticeboard</th>
+<th width="33%">Opportunity Inbox Copilot</th>
+</tr>
+<tr>
+<td valign="top"><p><em>Offline-first business software</em></p><p>A bilingual desktop ledger for Abdullah Rice Mill: payment evidence, receipts, reports, and recovery backups.</p></td>
+<td valign="top"><p><em>Student information system</em></p><p>University announcements brought together through a browser extension and installable PWA.</p></td>
+<td valign="top"><p><em>Applied AI &amp; discovery</em></p><p>Finds opportunities in Gmail, ranks them against user profiles, and helps people act before deadlines.</p></td>
+</tr>
+<tr>
+<td>Electron<br/>Node.js<br/>PostgreSQL</td>
+<td>Browser extension<br/>PWA<br/>Full-stack</td>
+<td>MERN<br/>GPT-4o-mini<br/>Gmail API</td>
+</tr>
+<tr>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/view-project.svg" width="100" alt="View Mill Ledger" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/view-project.svg" width="100" alt="View UCP Noticeboard" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/"><img src="assets/links/view-project.svg" width="100" alt="View Opportunity Inbox Copilot" /></a></td>
+</tr>
+</table>
 
-<p align="left">A bilingual desktop ledger for Abdullah Rice Mill. Payment evidence, receipts, reporting, and recovery backups—built around everyday operations.</p>
-
-<p align="left"><strong>Electron · Node.js · PostgreSQL</strong></p>
-
-<p align="left"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/case-study.svg" alt="Explore case study" width="164" height="44" /></a></p>
-
-<h3>UCP Noticeboard</h3>
-<p align="left"><em>Student tools / Information access</em></p>
-
-<p align="left">University announcements, brought together. A browser extension and installable PWA that help students find what matters.</p>
-
-<p align="left"><strong>Browser extension · PWA · Full-stack</strong></p>
-
-<p align="left"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study.svg" alt="Explore case study" width="164" height="44" /></a></p>
-
-<h3>Opportunity Inbox Copilot</h3>
-<p align="left"><em>Applied AI / Opportunity discovery</em></p>
-
-<p align="left">A multi-agent system that finds opportunities in Gmail, ranks them against user profiles, and helps people act before deadlines.</p>
-
-<p align="left"><strong>MERN · GPT-4o-mini · Gmail API</strong></p>
-
-<p align="left">
-  <a href="https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/"><img src="assets/links/case-study.svg" alt="Explore case study" width="164" height="44" /></a>
-</p>
-<p>
-  <a href="https://saadnazir.msndev.workers.dev/projects/"><img src="assets/links/projects.svg" alt="All projects" width="140" height="44" /></a>
-</p>
+<p><a href="https://saadnazir.msndev.workers.dev/projects/"><img src="assets/links/projects.svg" alt="All projects" width="140" height="44" /></a></p>
 
 <hr/>
 
-<h2>A little about me</h2>
+<p><img src="assets/about-strip.svg" width="100%" alt="A little about me — curious by nature, practical by choice." /></p>
 
 <p align="left">Pre-med turned computer scientist. Drawn to the work of making things work.</p>
 
@@ -86,6 +79,13 @@ IEEE Computer Society · UCP Student Chapter</p>
   <img src="https://skillicons.dev/icons?i=mongodb&amp;theme=light" width="44" height="44" alt="mongodb" />
   <img src="https://skillicons.dev/icons?i=docker&amp;theme=light" width="44" height="44" alt="docker" />
   <img src="https://skillicons.dev/icons?i=git&amp;theme=light" width="44" height="44" alt="git" />
+  <img src="https://skillicons.dev/icons?i=html&amp;theme=light" width="44" height="44" alt="HTML" />
+  <img src="https://skillicons.dev/icons?i=css&amp;theme=light" width="44" height="44" alt="CSS" />
+  <img src="https://skillicons.dev/icons?i=flask&amp;theme=light" width="44" height="44" alt="Flask" />
+  <img src="https://skillicons.dev/icons?i=mysql&amp;theme=light" width="44" height="44" alt="MySQL" />
+  <img src="https://skillicons.dev/icons?i=electron&amp;theme=light" width="44" height="44" alt="Electron" />
+  <img src="https://skillicons.dev/icons?i=github&amp;theme=light" width="44" height="44" alt="GitHub" />
+  <img src="https://skillicons.dev/icons?i=vscode&amp;theme=light" width="44" height="44" alt="VS Code" />
 </p>
 
 <p align="left"><strong>Full-stack:</strong> React, Node.js, FastAPI, PostgreSQL, MongoDB<br/>
@@ -94,14 +94,14 @@ IEEE Computer Society · UCP Student Chapter</p>
 
 <hr/>
 
-<h3 align="left">Good work starts with a conversation.</h3>
+<h3 align="center">Good work starts with a conversation.</h3>
 
-<p align="left">Have a role, a product idea, or a problem worth solving?</p>
+<p align="center">Have a role, a product idea, or a problem worth solving?</p>
 
-<p align="left">
+<p align="center">
   <a href="mailto:saadnazir099@gmail.com"><img src="assets/links/email.svg" alt="Email Saad" width="124" height="44" /></a>
   <a href="https://www.linkedin.com/in/saad-nazir0289"><img src="assets/links/linkedin.svg" alt="LinkedIn" width="116" height="44" /></a>
 </p>
 
-<p align="left"><sub>Lahore, Pakistan · Working worldwide</sub>
+<p align="center"><sub>Lahore, Pakistan · Working worldwide</sub>
 </p>
