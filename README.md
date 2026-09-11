@@ -1,98 +1,99 @@
-<p>
+<p align="center">
   <a href="https://saadnazir.msndev.workers.dev/"><img src="assets/portfolio-header.svg" width="100%" alt="saad nazir. Real Problems. Thoughtful Code. Useful Products." /></a>
 </p>
 
-### Software Engineer | Applied AI
+<h3 align="center">Software Engineer | Applied AI</h3>
 
-I’m **Saad**. I build business software, student tools, and AI systems shaped around real constraints.
+<p align="center">I’m <strong>Saad</strong>. I build business software, student tools, and AI systems shaped around real constraints.</p>
 
-Based in Lahore, Pakistan. Available remotely.
+<p align="center">Based in Lahore, Pakistan. Available remotely.</p>
 
-<p>
+<p align="center">
   <a href="https://saadnazir.msndev.workers.dev/"><img src="assets/links/explore.svg" alt="Explore my work" width="160" height="44" /></a>
   <a href="https://saadnazir.msndev.workers.dev/Saad-Nazir-Resume.pdf"><img src="assets/links/resume.svg" alt="Résumé" width="100" height="44" /></a>
 </p>
 
----
+<hr/>
 
-### 01 — Built for a reason
+<h3 align="center">01 — Built for a reason</h3>
 
-#### Mill Ledger
-*Business software / Offline-first*
+<h4 align="center">Mill Ledger</h4>
+<p align="center"><em>Business software / Offline-first</em></p>
 
-A bilingual desktop ledger for Abdullah Rice Mill. Payment evidence, receipts, reporting, and recovery backups—built around everyday operations.
+<p align="center">A bilingual desktop ledger for Abdullah Rice Mill. Payment evidence, receipts, reporting, and recovery backups—built around everyday operations.</p>
 
-**Electron · Node.js · PostgreSQL**
+<p align="center"><strong>Electron · Node.js · PostgreSQL</strong></p>
 
-<a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/case-study.svg" alt="Explore case study" width="164" height="44" /></a>
+<p align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/case-study.svg" alt="Explore case study" width="164" height="44" /></a></p>
 
-#### UCP Noticeboard
-*Student tools / Information access*
+<h4 align="center">UCP Noticeboard</h4>
+<p align="center"><em>Student tools / Information access</em></p>
 
-University announcements, brought together. A browser extension and installable PWA that help students find what matters.
+<p align="center">University announcements, brought together. A browser extension and installable PWA that help students find what matters.</p>
 
-**Browser extension · PWA · Full-stack**
+<p align="center"><strong>Browser extension · PWA · Full-stack</strong></p>
 
-<a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study.svg" alt="Explore case study" width="164" height="44" /></a>
+<p align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study.svg" alt="Explore case study" width="164" height="44" /></a></p>
 
-#### Opportunity Inbox Copilot
-*Applied AI / Opportunity discovery*
+<h4 align="center">Opportunity Inbox Copilot</h4>
+<p align="center"><em>Applied AI / Opportunity discovery</em></p>
 
-A multi-agent system that finds opportunities in Gmail, ranks them against user profiles, and helps people act before deadlines.
+<p align="center">A multi-agent system that finds opportunities in Gmail, ranks them against user profiles, and helps people act before deadlines.</p>
 
-**MERN · GPT-4o-mini · Gmail API**
+<p align="center"><strong>MERN · GPT-4o-mini · Gmail API</strong></p>
 
-<p>
+<p align="center">
   <a href="https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/"><img src="assets/links/case-study.svg" alt="Explore case study" width="164" height="44" /></a>
 </p>
 <p>
   <a href="https://saadnazir.msndev.workers.dev/projects/"><img src="assets/links/projects.svg" alt="All projects" width="140" height="44" /></a>
 </p>
 
----
+<hr/>
 
-### 02 — The bigger picture
+<h3 align="center">02 — The bigger picture</h3>
 
-Pre-med turned computer scientist. Drawn to the work of making things work.
+<p align="center">Pre-med turned computer scientist. Drawn to the work of making things work.</p>
 
-I start with the business constraint, compare the tradeoffs, and build a practical path to delivery. My work spans full-stack development, applied AI, automation, and teaching.
+<p align="center">I start with the business constraint, compare the tradeoffs, and build a practical path to delivery. My work spans full-stack development, applied AI, automation, and teaching.</p>
 
-**BS Computer Science**  
-University of Central Punjab · 2023–2027  
-3.92 / 4.00 CGPA · 100% merit scholarship
+<p align="center"><strong>BS Computer Science</strong><br/>
+University of Central Punjab · 2023–2027<br/>
+3.92 / 4.00 CGPA · 100% merit scholarship</p>
 
-**Marketing Director**  
-Hult Prize · UCP On-Campus
+<p align="center"><strong>Marketing Director</strong><br/>
+Hult Prize · UCP On-Campus</p>
 
-**Hackathon Director**  
-IEEE Computer Society · UCP Student Chapter
+<p align="center"><strong>Hackathon Director</strong><br/>
+IEEE Computer Society · UCP Student Chapter</p>
 
-<p>
+<p align="center">
   <a href="https://saadnazir.msndev.workers.dev/journey/"><img src="assets/links/journey.svg" alt="My journey" width="132" height="44" /></a>
   <a href="https://saadnazir.msndev.workers.dev/certifications/"><img src="assets/links/certifications.svg" alt="Certifications" width="144" height="44" /></a>
 </p>
 
----
+<hr/>
 
-### 03 — My toolbox
+<h3 align="center">03 — My toolbox</h3>
 
-<p>
+<p align="center">
   <img src="https://skillicons.dev/icons?i=python,js,react,nodejs,fastapi,postgres,mongodb,docker,git&amp;theme=light&amp;perline=3" width="168" alt="Python, JavaScript, React, Node.js, FastAPI, PostgreSQL, MongoDB, Docker, Git" />
 </p>
 
-**Full-stack:** React, Node.js, FastAPI, PostgreSQL, MongoDB  
-**Applied AI:** LLMs, agents, n8n  
-**Delivery:** Docker, Git, Electron, PWAs
+<p align="center"><strong>Full-stack:</strong> React, Node.js, FastAPI, PostgreSQL, MongoDB<br/>
+<strong>Applied AI:</strong> LLMs, agents, n8n<br/>
+<strong>Delivery:</strong> Docker, Git, Electron, PWAs</p>
 
----
+<hr/>
 
-### Good work starts with a conversation.
+<h3 align="center">Good work starts with a conversation.</h3>
 
-Have a role, a product idea, or a problem worth solving?
+<p align="center">Have a role, a product idea, or a problem worth solving?</p>
 
-<p>
+<p align="center">
   <a href="mailto:saadnazir099@gmail.com"><img src="assets/links/email.svg" alt="Email Saad" width="124" height="44" /></a>
   <a href="https://www.linkedin.com/in/saad-nazir0289"><img src="assets/links/linkedin.svg" alt="LinkedIn" width="116" height="44" /></a>
 </p>
 
-<sub>Lahore, Pakistan · Working worldwide</sub>
+<p align="center"><sub>Lahore, Pakistan · Working worldwide</sub>
+</p>
