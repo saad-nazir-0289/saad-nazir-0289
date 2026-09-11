@@ -52,7 +52,7 @@
   <img src="assets/about-leadership-compact.svg" width="210" alt="LEADERSHIP: Marketing Director Hult Prize · UCP On-Campus Hackathon Director IEEE Computer Society UCP Student Chapter" />
 </p>
 
-<p align="left">
+<p align="center">
   <a href="https://saadnazir.msndev.workers.dev/journey/"><img src="assets/links/journey.svg" alt="My journey" width="132" height="44" /></a>
   <a href="https://saadnazir.msndev.workers.dev/certifications/"><img src="assets/links/certifications.svg" alt="Certifications" width="144" height="44" /></a>
 </p>
