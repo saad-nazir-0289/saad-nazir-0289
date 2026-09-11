@@ -3,10 +3,10 @@
 </p>
 
 <p align="center">
-  <a href="https://saadnazir.msndev.workers.dev/"><b>Explore my work ↗</b></a> &nbsp; · &nbsp;
-  <a href="https://saadnazir.msndev.workers.dev/Saad-Nazir-Resume.pdf">Résumé</a> &nbsp; · &nbsp;
-  <a href="https://www.linkedin.com/in/saad-nazir0289">LinkedIn</a> &nbsp; · &nbsp;
-  <a href="mailto:saadnazir099@gmail.com">Email</a>
+  <a href="https://saadnazir.msndev.workers.dev/"><img src="assets/links/explore.svg" alt="Explore my work ↗" height="36" /></a> &nbsp; · &nbsp;
+  <a href="https://saadnazir.msndev.workers.dev/Saad-Nazir-Resume.pdf"><img src="assets/links/resume.svg" alt="Résumé" height="36" /></a> &nbsp; · &nbsp;
+  <a href="https://www.linkedin.com/in/saad-nazir0289"><img src="assets/links/linkedin.svg" alt="LinkedIn" height="36" /></a> &nbsp; · &nbsp;
+  <a href="mailto:saadnazir099@gmail.com"><img src="assets/links/email.svg" alt="Email" height="36" /></a>
 </p>
 
 I’m **Saad**, a software engineer working across full-stack development, applied AI, and automation. I turn business constraints into working software—from offline tools to intelligent systems.
@@ -19,11 +19,11 @@ The problem comes first. The stack follows.
 
 | Project | Built for a reason |
 | :--- | :--- |
-| **[Mill Ledger ↗](https://saadnazir.msndev.workers.dev/work/mill-ledger/)** | A bilingual, offline-first desktop ledger for Abdullah Rice Mill. Payment evidence, receipts, reporting, and recovery backups. **Electron · Node.js · PostgreSQL** |
-| **[UCP Noticeboard ↗](https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/)** | Scattered university announcements brought together through a browser extension and installable PWA. **Browser extension · PWA · Full-stack** |
-| **[Opportunity Inbox Copilot ↗](https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/)** | A multi-agent system that finds opportunities in Gmail, ranks them against user profiles, and helps people act before deadlines. **MERN · GPT-4o-mini · Gmail API** |
+| <a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/mill-ledger.svg" alt="Mill Ledger ↗" height="36" /></a> | A bilingual, offline-first desktop ledger for Abdullah Rice Mill. Payment evidence, receipts, reporting, and recovery backups. **Electron · Node.js · PostgreSQL** |
+| <a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/ucp-noticeboard.svg" alt="UCP Noticeboard ↗" height="36" /></a> | Scattered university announcements brought together through a browser extension and installable PWA. **Browser extension · PWA · Full-stack** |
+| <a href="https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/"><img src="assets/links/opportunity.svg" alt="Opportunity Inbox Copilot ↗" height="36" /></a> | A multi-agent system that finds opportunities in Gmail, ranks them against user profiles, and helps people act before deadlines. **MERN · GPT-4o-mini · Gmail API** |
 
-**[All projects →](https://saadnazir.msndev.workers.dev/projects/)**
+<a href="https://saadnazir.msndev.workers.dev/projects/"><img src="assets/links/projects.svg" alt="All projects →" height="36" /></a>
 
 ### 02 / A little about me
 
@@ -52,14 +52,14 @@ Pre-med turned computer scientist. Drawn to the work of making things work.
 
 Hackathons, business cases, teaching, and a funded research proposal have shaped how I approach the work.
 
-[Competition stories & journey ↗](https://saadnazir.msndev.workers.dev/journey/) &nbsp; · &nbsp; [Certifications ↗](https://saadnazir.msndev.workers.dev/certifications/)
+<a href="https://saadnazir.msndev.workers.dev/journey/"><img src="assets/links/journey.svg" alt="Competition stories &amp; journey ↗" height="36" /></a> &nbsp; · &nbsp; <a href="https://saadnazir.msndev.workers.dev/certifications/"><img src="assets/links/certifications.svg" alt="Certifications ↗" height="36" /></a>
 
 ---
 
 <p align="center"><b>Good work starts with a conversation.</b></p>
 <p align="center">
   Lahore, Pakistan · Working worldwide<br/><br/>
-  <a href="mailto:saadnazir099@gmail.com">saadnazir099@gmail.com</a> &nbsp; · &nbsp;
-  <a href="https://www.linkedin.com/in/saad-nazir0289">LinkedIn</a> &nbsp; · &nbsp;
-  <a href="https://www.instagram.com/_saad_nazir_">Behind the scenes</a>
+  <a href="mailto:saadnazir099@gmail.com"><img src="assets/links/contact.svg" alt="saadnazir099@gmail.com" height="36" /></a> &nbsp; · &nbsp;
+  <a href="https://www.linkedin.com/in/saad-nazir0289"><img src="assets/links/linkedin.svg" alt="LinkedIn" height="36" /></a> &nbsp; · &nbsp;
+  <a href="https://www.instagram.com/_saad_nazir_"><img src="assets/links/behind-scenes.svg" alt="Behind the scenes" height="36" /></a>
 </p>
