@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="330" viewBox="0 0 640 330"><rect width="640" height="330" rx="14" fill="#f9faf7"/><g font-family="Arial,Helvetica,sans-serif"><text x="320" y="53" text-anchor="middle" font-size="30" font-weight="700" letter-spacing="-1" fill="#23231f">saad naz<tspan fill="#b94424">ir.</tspan></text><circle cx="603" cy="43" r="6" fill="#52712f"/><path d="M32 78H608" stroke="#dce0d6"/><g font-size="49" font-weight="600" letter-spacing="-2"><text x="320" y="147" text-anchor="middle" fill="#23231f">Real Problems.</text><text x="320" y="211" text-anchor="middle" fill="#23231f">Thoughtful Code.</text><text x="320" y="275" text-anchor="middle" fill="#b94424">Useful Products.</text></g><path d="M261 308H379" stroke="#b94424" stroke-width="3"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="340" viewBox="0 0 900 340">
+<rect width="900" height="340" rx="16" fill="#f9faf7"/>
+<path d="M42 86H858" stroke="#dce0d6"/>
+<text x="450" y="57" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="700" letter-spacing="-1" fill="#23231f">saad naz<tspan fill="#b94424">ir.</tspan></text>
+<g text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="54" letter-spacing="-1">
+<text x="450" y="153" fill="#23231f">Real Problems.</text>
+<text x="450" y="220" fill="#23231f">Thoughtful Code.</text>
+<text x="450" y="287" font-style="italic" fill="#b94424">Useful Products.</text>
+</g></svg>
