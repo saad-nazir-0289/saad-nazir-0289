@@ -2,11 +2,11 @@
   <a href="https://saadnazir.msndev.workers.dev/"><img src="assets/portfolio-header.svg" width="100%" alt="saad nazir. Real Problems. Thoughtful Code. Useful Products." /></a>
 </p>
 
-<h3 align="center">Software Engineer | Applied AI</h3>
+<h3 align="center">Software Engineer · Full-Stack · Applied AI</h3>
 
-<p align="center">I’m <strong>Saad</strong>. I build business software, student tools, and AI systems shaped around real constraints.</p>
+<p align="center"><strong>I build software that gets used.</strong> From offline business systems and campus products to computer vision and remote-sensing research.</p>
 
-<p align="center">Based in Lahore, Pakistan. Available remotely.</p>
+<p align="center">BS Computer Science @ UCP · 3.93/4.00 CGPA · Lahore, Pakistan · Open to software engineering opportunities</p>
 
 <p align="center">
   <a href="https://saadnazir.msndev.workers.dev/"><img src="assets/links/explore.svg" alt="Explore my work" width="160" height="44" /></a>
@@ -15,36 +15,43 @@
 
 <hr/>
 
-<h2>Selected work</h2>
+<h2>What I've shipped</h2>
 
 <table>
+<tr><th width="50%">Mill Ledger</th><th width="50%">UCP Noticeboard</th></tr>
 <tr>
-<th width="33%">Mill Ledger</th>
-<th width="33%">UCP Noticeboard</th>
-<th width="33%">Opportunity Inbox Copilot</th>
+<td valign="top"><strong>Client software · In production</strong><br/><br/>Offline-first, bilingual desktop software built for a rice mill to manage transactions, ledgers, receipts, verification evidence, aging, audit trails, and backups.</td>
+<td valign="top"><strong>Public product · Live</strong><br/><br/>A Chrome extension + installable PWA that puts campus notices where UCP students already look, backed by a shared publishing system.</td>
 </tr>
+<tr><td><strong>Built with:</strong> Electron · React · TypeScript · SQLite</td><td><strong>Built with:</strong> React · TypeScript · ASP.NET Core · PostgreSQL</td></tr>
 <tr>
-<td valign="top"><p><em>Offline-first business software</em></p><p>A bilingual desktop ledger for Abdullah Rice Mill: payment evidence, receipts, reports, and recovery backups.</p></td>
-<td valign="top"><p><em>Student information system</em></p><p>University announcements brought together through a browser extension and installable PWA.</p></td>
-<td valign="top"><p><em>Applied AI &amp; discovery</em></p><p>Finds opportunities in Gmail, ranks them against user profiles, and helps people act before deadlines.</p></td>
-</tr>
-<tr>
-<td>Electron<br/>Node.js<br/>PostgreSQL</td>
-<td>Browser extension<br/>PWA<br/>Full-stack</td>
-<td>MERN<br/>GPT-4o-mini<br/>Gmail API</td>
-</tr>
-<tr>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/case-study-white.svg" width="116" alt="Case study: Mill Ledger" /></a></td>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study-white.svg" width="116" alt="Case study: UCP Noticeboard" /></a></td>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/opportunity-inbox-copilot/"><img src="assets/links/case-study-white.svg" width="116" alt="Case study: Opportunity Inbox Copilot" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/case-study-white.svg" width="116" alt="Mill Ledger case study" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study-white.svg" width="116" alt="UCP Noticeboard case study" /></a></td>
 </tr>
 </table>
+
+<h3>Currently building & researching</h3>
+
+- **UCP Gate Vision** — leading development of a campus ANPR system for real-time vehicle/plate detection, tracking, recognition, and gate events.
+- **AgriVision** — final-year research on spatiotemporal fusion of MODIS + Sentinel-2 imagery toward daily 10 m NDVI.
+- **Applied AI & automation** — building practical workflows, search systems, and agents around real operational problems.
 
 <p align="center"><a href="https://saadnazir.msndev.workers.dev/projects/"><img src="assets/links/projects.svg" alt="All projects" width="140" height="44" /></a></p>
 
 <hr/>
 
 <p><img src="assets/about-strip.svg" width="100%" alt="A little about me — curious by nature, practical by choice." /></p>
+
+<table>
+<tr>
+<td align="center"><strong>10+</strong><br/>competition wins</td>
+<td align="center"><strong>3.93/4.00</strong><br/>CGPA</td>
+<td align="center"><strong>40+</strong><br/>students mentored</td>
+<td align="center"><strong>PKR 1M</strong><br/>funded research proposal · co-author</td>
+</tr>
+</table>
+
+<p>I’m a final-year Computer Science student who likes taking ambiguous problems and turning them into working systems. My work spans full-stack products, desktop software, applied AI, computer vision, automation, and research. I’ve also taught competitive programming, worked as an OOP lab TA, led technical teams, and competed across hackathons and business competitions.</p>
 
 <p align="center">
   <a href="https://saadnazir.msndev.workers.dev/#about"><img src="assets/links/about.svg" alt="About" width="104" height="44" /></a>
@@ -81,14 +88,13 @@
 
 <hr/>
 
-<h3 align="center">Good work starts with a conversation.</h3>
+<h3 align="center">Have a role, product, or hard problem worth solving?</h3>
 
-<p align="center">Have a role, a product idea, or a problem worth solving?</p>
+<p align="center">I’m interested in software engineering, full-stack, and applied-AI work where I can ship real systems.</p>
 
 <p align="center">
   <a href="mailto:saadnazir099@gmail.com"><img src="assets/links/email.svg" alt="Email Saad" width="124" height="44" /></a>
   <a href="https://www.linkedin.com/in/saad-nazir0289"><img src="assets/links/linkedin.svg" alt="LinkedIn" width="116" height="44" /></a>
 </p>
 
-<p align="center"><sub>Lahore, Pakistan · Working worldwide</sub>
-</p>
+<p align="center"><sub>Lahore, Pakistan · Working worldwide</sub></p>
