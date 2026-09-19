@@ -6,7 +6,7 @@
 
 <p align="center"><strong>I build software that gets used.</strong> From offline business systems and campus products to computer vision and remote-sensing research.</p>
 
-<p align="center">BS Computer Science @ UCP · 3.93/4.00 CGPA · Lahore, Pakistan · Open to software engineering opportunities</p>
+<p align="center">BS Computer Science @ UCP · 3.93/4.00 CGPA · Lahore, Pakistan</p>
 
 <p align="center">
   <a href="https://saadnazir.msndev.workers.dev/"><img src="assets/links/explore.svg" alt="Explore my work" width="160" height="44" /></a>
@@ -88,9 +88,9 @@
 
 <hr/>
 
-<h3 align="center">Have a role, product, or hard problem worth solving?</h3>
+<h3 align="center">Building useful things, one problem at a time.</h3>
 
-<p align="center">I’m interested in software engineering, full-stack, and applied-AI work where I can ship real systems.</p>
+<p align="center">Full-stack software · Applied AI · Computer vision · Research</p>
 
 <p align="center">
   <a href="mailto:saadnazir099@gmail.com"><img src="assets/links/email.svg" alt="Email Saad" width="124" height="44" /></a>
