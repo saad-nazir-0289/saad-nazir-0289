@@ -13,6 +13,8 @@
   <a href="https://saadnazir.msndev.workers.dev/Saad-Nazir-Resume.pdf"><img src="assets/links/resume.svg" alt="Résumé" width="100" height="44" /></a>
 </p>
 
+<p align="center"><sub>Backup: <a href="./M.%20Saad%20Nazir%20CV%202026%20%282%29.pdf">view the résumé PDF stored in this repository</a>.</sub></p>
+
 <hr/>
 
 <h2>What I've shipped</h2>
