@@ -28,7 +28,7 @@
 <tr><td><strong>Built with:</strong> Electron · React · TypeScript · SQLite</td><td><strong>Built with:</strong> React · TypeScript · ASP.NET Core · PostgreSQL</td></tr>
 <tr>
 <td align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/case-study-white.svg" width="116" alt="Mill Ledger case study" /></a></td>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study-white.svg" width="116" alt="UCP Noticeboard case study" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study-white.svg" width="116" alt="UCP Noticeboard case study" /></a><br/><br/><a href="https://ucp-noticeboard.msndev.workers.dev/">Open live PWA</a></td>
 </tr>
 </table>
 
