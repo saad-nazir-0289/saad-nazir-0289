@@ -84,7 +84,7 @@
   <img src="https://skillicons.dev/icons?i=vscode&amp;theme=light" width="44" height="44" alt="VS Code" />
 </p>
 
-<p align="center"><strong>Full-stack:</strong> React, Node.js, FastAPI, PostgreSQL, MongoDB<br/>
+<p align="center"><strong>Full-stack:</strong> React, Node.js, ASP.NET Core, FastAPI, PostgreSQL, MongoDB<br/>
 <strong>Applied AI:</strong> LLMs, agents, n8n<br/>
 <strong>Delivery:</strong> Docker, Git, Electron, PWAs</p>
 
