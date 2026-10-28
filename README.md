@@ -28,7 +28,7 @@
 <tr><td><strong>Built with:</strong> Electron · React · TypeScript · SQLite</td><td><strong>Built with:</strong> React · TypeScript · ASP.NET Core · PostgreSQL</td></tr>
 <tr>
 <td align="center"><a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/"><img src="assets/links/case-study-white.svg" width="116" alt="Mill Ledger case study" /></a></td>
-<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study-white.svg" width="116" alt="UCP Noticeboard case study" /></a></td>
+<td align="center"><a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/"><img src="assets/links/case-study-white.svg" width="116" alt="UCP Noticeboard case study" /></a><br/><br/><a href="https://ucp-noticeboard.msndev.workers.dev/">Open live PWA</a><br/><a href="https://github.com/saad-nazir-0289/ucp-noticeboard">View source code</a></td>
 </tr>
 </table>
 
@@ -84,7 +84,7 @@
   <img src="https://skillicons.dev/icons?i=vscode&amp;theme=light" width="44" height="44" alt="VS Code" />
 </p>
 
-<p align="center"><strong>Full-stack:</strong> React, Node.js, FastAPI, PostgreSQL, MongoDB<br/>
+<p align="center"><strong>Full-stack:</strong> React, Node.js, ASP.NET Core, FastAPI, PostgreSQL, MongoDB<br/>
 <strong>Applied AI:</strong> LLMs, agents, n8n<br/>
 <strong>Delivery:</strong> Docker, Git, Electron, PWAs</p>
 
