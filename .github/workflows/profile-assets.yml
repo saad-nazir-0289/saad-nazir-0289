@@ -9,6 +9,16 @@ on:
       - "scripts/check_profile_assets.py"
       - "tests/**"
       - ".github/workflows/profile-assets.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "assets/**"
+      - "M. Saad Nazir CV 2026 (2).pdf"
+      - "scripts/check_profile_assets.py"
+      - "tests/**"
+      - ".github/workflows/profile-assets.yml"
   workflow_dispatch:
 
 permissions:
