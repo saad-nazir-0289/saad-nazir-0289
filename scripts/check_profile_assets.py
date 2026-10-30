@@ -8,7 +8,10 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
-MARKDOWN_LINK_RE = re.compile(r"!?\[[^\]]*\]\((<[^>]+>|[^)\s]+)(?:\s+[^)]*)?\)")
+FENCE_OPEN_RE = re.compile(r" {0,3}(`{3,}|~{3,})")
+INLINE_CODE_RE = re.compile(r"(?<!`)(`+).*?(?<!`)\1(?!`)", re.DOTALL)
+MARKDOWN_LINK_RE = re.compile(r"!?\[[^\]]*\]\(")
+MARKDOWN_ESCAPABLE = re.compile(r"\\([\\`*_{}\[\]()#+\-.!<>|~])")
 
 
 class LocalReferenceParser(HTMLParser):
@@ -28,6 +31,96 @@ class LocalReferenceParser(HTMLParser):
                 self.paths.append(path)
 
 
+def _without_code_examples(readme_text: str) -> str:
+    """Remove fenced and inline code so examples are not treated as real links."""
+    output: list[str] = []
+    fence_char: str | None = None
+    fence_length = 0
+
+    for line in readme_text.splitlines(keepends=True):
+        if fence_char is None:
+            opening = FENCE_OPEN_RE.match(line)
+            if opening:
+                fence = opening.group(1)
+                fence_char, fence_length = fence[0], len(fence)
+                output.append("\n" if line.endswith(("\n", "\r")) else "")
+                continue
+        else:
+            closing = re.match(
+                rf" {{0,3}}{re.escape(fence_char)}{{{fence_length},}}[ \t]*(?:\r?\n)?$",
+                line,
+            )
+            if closing:
+                fence_char, fence_length = None, 0
+            output.append("\n" if line.endswith(("\n", "\r")) else "")
+            continue
+
+        output.append(line)
+
+    text = "".join(output)
+    return INLINE_CODE_RE.sub(
+        lambda match: "".join(
+            char if char in "\r\n" else " " for char in match.group(0)
+        ),
+        text,
+    )
+
+
+def _markdown_destinations(readme_text: str) -> set[str]:
+    """Extract inline Markdown link/image destinations, including balanced parentheses."""
+    destinations: set[str] = set()
+
+    for match in MARKDOWN_LINK_RE.finditer(readme_text):
+        index = match.end()
+        while index < len(readme_text) and readme_text[index].isspace():
+            index += 1
+
+        if index < len(readme_text) and readme_text[index] == "<":
+            start = index + 1
+            index = start
+            while index < len(readme_text):
+                if readme_text[index] == ">" and not _is_escaped(readme_text, index):
+                    destinations.add(
+                        MARKDOWN_ESCAPABLE.sub(r"\1", readme_text[start:index])
+                    )
+                    break
+                index += 1
+            continue
+
+        start = index
+        depth = 0
+        while index < len(readme_text):
+            char = readme_text[index]
+            if _is_escaped(readme_text, index):
+                index += 1
+                continue
+            if char == "(":
+                depth += 1
+            elif char == ")":
+                if depth == 0:
+                    break
+                depth -= 1
+            elif char.isspace() and depth == 0:
+                break
+            index += 1
+
+        destination = readme_text[start:index]
+        if destination:
+            destinations.add(MARKDOWN_ESCAPABLE.sub(r"\1", destination))
+
+    return destinations
+
+
+def _is_escaped(text: str, index: int) -> bool:
+    """Return whether the character at index is preceded by an odd backslash run."""
+    backslashes = 0
+    index -= 1
+    while index >= 0 and text[index] == "\\":
+        backslashes += 1
+        index -= 1
+    return backslashes % 2 == 1
+
+
 def _local_path(destination: str) -> str | None:
     """Return a decoded local path, ignoring URLs and fragment-only links."""
     destination = destination.strip()
@@ -42,12 +135,14 @@ def _local_path(destination: str) -> str | None:
 
 def collect_local_references(readme_text: str) -> set[str]:
     """Collect local paths from HTML attributes and Markdown inline links/images."""
+    readme_text = _without_code_examples(readme_text)
+
     parser = LocalReferenceParser()
     parser.feed(readme_text)
     references = set(parser.paths)
 
-    for match in MARKDOWN_LINK_RE.finditer(readme_text):
-        path = _local_path(match.group(1))
+    for destination in _markdown_destinations(readme_text):
+        path = _local_path(destination)
         if path:
             references.add(path)
 
