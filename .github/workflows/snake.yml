@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "scripts/**"
+      - "tests/**"
+      - ".github/workflows/profile-assets.yml"
+      - ".github/workflows/snake.yml"
   schedule:
     - cron: "0 */12 * * *"
   workflow_dispatch:
