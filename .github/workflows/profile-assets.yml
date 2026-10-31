@@ -5,7 +5,7 @@ on:
     paths:
       - "README.md"
       - "assets/**"
-      - "M. Saad Nazir CV 2026 (2).pdf"
+      - "Saad-Nazir-Resume.pdf"
       - "scripts/check_profile_assets.py"
       - "tests/**"
       - ".github/workflows/profile-assets.yml"
@@ -15,7 +15,7 @@ on:
     paths:
       - "README.md"
       - "assets/**"
-      - "M. Saad Nazir CV 2026 (2).pdf"
+      - "Saad-Nazir-Resume.pdf"
       - "scripts/check_profile_assets.py"
       - "tests/**"
       - ".github/workflows/profile-assets.yml"

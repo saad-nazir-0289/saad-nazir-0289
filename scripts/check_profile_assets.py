@@ -14,7 +14,7 @@ MARKDOWN_ESCAPABLE = re.compile(r"\\([\\`*_{}\[\]()#+\-.!<>|~])")
 
 
 class LocalReferenceParser(HTMLParser):
-    """Collect local href/src paths from HTML embedded in README.md."""
+    """Collect local href/src/srcset paths from HTML embedded in README.md."""
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -22,12 +22,20 @@ class LocalReferenceParser(HTMLParser):
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         for name, value in attrs:
-            if name not in {"href", "src"} or not value:
+            if not value:
+                continue
+            if name in {"href", "src"}:
+                candidates = [value]
+            elif name == "srcset":
+                # "a.svg, b.svg 2x": each comma-separated entry is a URL plus an optional descriptor.
+                candidates = [entry.split()[0] for entry in value.split(",") if entry.strip()]
+            else:
                 continue
 
-            path = _local_path(value)
-            if path:
-                self.paths.append(path)
+            for candidate in candidates:
+                path = _local_path(candidate)
+                if path:
+                    self.paths.append(path)
 
 
 def _without_code_examples(readme_text: str) -> str:
