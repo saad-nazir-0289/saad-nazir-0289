@@ -28,6 +28,19 @@ class ProfileAssetCheckerTests(unittest.TestCase):
             collect_local_references(readme),
         )
 
+    def test_collects_picture_srcset_candidates(self):
+        readme = """
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg" />
+  <source srcset="assets/wide.svg 2x, https://example.com/remote.svg 1x" />
+  <img src="assets/header-light.svg" alt="Header" />
+</picture>
+"""
+        self.assertEqual(
+            {"assets/header-dark.svg", "assets/wide.svg", "assets/header-light.svg"},
+            collect_local_references(readme),
+        )
+
     def test_collects_destinations_with_balanced_and_escaped_parentheses(self):
         readme = r"""
 [Chart](assets/chart_(v2).svg)
