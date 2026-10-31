@@ -45,18 +45,18 @@ class ProfileAssetCheckerTests(unittest.TestCase):
 
     def test_ignores_fenced_and_inline_code_examples(self):
         readme = """
-\`\`\`markdown
+```markdown
 [Fake link](missing-fenced.md)
 [Fake reference]: missing-fenced-reference.md
 [Fake reference]
 <a href="missing-fenced.html">Fake HTML</a>
-\`\`\`
+```
 
 ~~~html
 <img src="missing-image.svg" />
 ~~~
 
-Inline example: \`[not a link](missing-inline.md)\`.
+Inline example: `[not a link](missing-inline.md)`.
 
 [Real link](docs/real.md)
 """
