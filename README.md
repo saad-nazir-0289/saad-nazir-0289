@@ -2,7 +2,7 @@
 
 <a href="https://saadnazir.msndev.workers.dev/">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg" />
+    <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/header-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/header-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg" />
     <img src="assets/header-light.svg" width="100%" alt="saad nazir. Real problems. Thoughtful code. Useful software. I’m Saad, a Software Engineer focused on Applied AI. I turn complex problems into working prototypes in days, then build them into software people can rely on." />
   </picture>
 </a>
@@ -13,27 +13,27 @@
 </p>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg" />
+  <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/stats-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/stats-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg" />
   <img src="assets/stats-light.svg" width="100%" alt="13 projects completed · 10+ competition wins · PKR 1M research funded (co-author) · 80+ students mentored" />
 </picture>
 
 <br/><br/>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/h-work-dark.svg" />
+  <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/h-work-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/h-work-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/h-work-dark.svg" />
   <img src="assets/h-work-light.svg" width="100%" alt="01 / Selected work — Selected projects." />
 </picture>
 
 <a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/card-mill-ledger-dark.svg" />
+    <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/card-mill-ledger-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/card-mill-ledger-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/card-mill-ledger-dark.svg" />
     <img src="assets/card-mill-ledger-light.svg" width="100%" alt="Mill Ledger — offline accounting used at Abdullah Rice Mills for daily transactions and record-keeping. Electron, React, TypeScript, SQLite. Read the case study." />
   </picture>
 </a>
 
 <a href="https://saadnazir.msndev.workers.dev/work/ucp-noticeboard/">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/card-ucp-noticeboard-dark.svg" />
+    <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/card-ucp-noticeboard-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/card-ucp-noticeboard-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/card-ucp-noticeboard-dark.svg" />
     <img src="assets/card-ucp-noticeboard-light.svg" width="100%" alt="UCP Noticeboard — campus notices inside the UCP student portal and on an installable web app. Read the case study." />
   </picture>
 </a>
@@ -47,12 +47,12 @@
 <br/>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/h-about-dark.svg" />
+  <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/h-about-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/h-about-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/h-about-dark.svg" />
   <img src="assets/h-about-light.svg" width="100%" alt="02 / A little about me — About me." />
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/about-dark.svg" />
+  <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/about-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/about-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/about-dark.svg" />
   <img src="assets/about-light.svg" width="100%" alt="I switched from pre-med to computer science. As a medical student, I couldn’t ignore my passion for computers. My parents hoped I’d become a doctor, so I took a stand to prove I belonged here. That decision changed my journey. Today I study computer science at UCP, build software, compete in hackathons, and do research. Next, I want to join a team building AI products and own features from idea to production. 01 Full-stack products: web apps, APIs, and desktop software. 02 AI and automation: email workflows, search tools, and agents. 03 Product decisions: choosing features and testing them against the user’s requirements." />
 </picture>
 
@@ -64,7 +64,7 @@
 <br/>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/h-now-dark.svg" />
+  <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/h-now-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/h-now-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/h-now-dark.svg" />
   <img src="assets/h-now-light.svg" width="100%" alt="03 / In progress — Currently building." />
 </picture>
 
@@ -73,27 +73,27 @@
   <a href="https://saadnazir.msndev.workers.dev/work/agrivision/"><img src="assets/now/agrivision.webp" width="49%" alt="Animated satellite view: clouds hide the farms, a blurry daily image gets through, and AgriVision rebuilds a sharp crop-health map." /></a>
 </p>
 <p>
-  <a href="https://saadnazir.msndev.workers.dev/work/ucp-gate-vision/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/now-gate-vision-dark.svg" /><img src="assets/now-gate-vision-light.svg" width="49%" alt="UCP Gate Vision — computer vision, Tech Lead. Spots every car at three campus gates, reads its number plate, logs the entry, and flags banned vehicles. Takhleeq × UCP. Case study." /></picture></a>
-  <a href="https://saadnazir.msndev.workers.dev/work/agrivision/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/now-agrivision-dark.svg" /><img src="assets/now-agrivision-light.svg" width="49%" alt="AgriVision — deep learning, final-year project. Sharp satellite photos are often lost to clouds. AgriVision fills the gaps from blurry daily images to map crop health. Case study." /></picture></a>
+  <a href="https://saadnazir.msndev.workers.dev/work/ucp-gate-vision/"><picture><source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/now-gate-vision-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/now-gate-vision-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/now-gate-vision-dark.svg" /><img src="assets/now-gate-vision-light.svg" width="49%" alt="UCP Gate Vision — computer vision, Tech Lead. Spots every car at three campus gates, reads its number plate, logs the entry, and flags banned vehicles. Takhleeq × UCP. Case study." /></picture></a>
+  <a href="https://saadnazir.msndev.workers.dev/work/agrivision/"><picture><source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/now-agrivision-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/now-agrivision-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/now-agrivision-dark.svg" /><img src="assets/now-agrivision-light.svg" width="49%" alt="AgriVision — deep learning, final-year project. Sharp satellite photos are often lost to clouds. AgriVision fills the gaps from blurry daily images to map crop health. Case study." /></picture></a>
 </p>
 
 <br/>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/h-blog-dark.svg" />
+  <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/h-blog-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/h-blog-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/h-blog-dark.svg" />
   <img src="assets/h-blog-light.svg" width="100%" alt="04 / Writing — Latest from the blog." />
 </picture>
 
 <a href="https://saadnazir.msndev.workers.dev/blogs/predicting-rare-spikes/">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/blog-1-dark.svg" />
+    <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/blog-1-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/blog-1-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/blog-1-dark.svg" />
     <img src="assets/blog-1-light.svg" width="100%" alt="Predicting the 5%: How to Forecast Rare Spikes, and How to Know When You Can’t — machine learning, 19 min read." />
   </picture>
 </a>
 
 <a href="https://saadnazir.msndev.workers.dev/blogs/building-mill-ledger/">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/blog-2-dark.svg" />
+    <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/blog-2-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/blog-2-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/blog-2-dark.svg" />
     <img src="assets/blog-2-light.svg" width="100%" alt="What building accounting software for a rice mill taught me — product engineering, 4 min read." />
   </picture>
 </a>
@@ -105,25 +105,25 @@
 <br/>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/h-toolbox-dark.svg" />
+  <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/h-toolbox-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/h-toolbox-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/h-toolbox-dark.svg" />
   <img src="assets/h-toolbox-light.svg" width="100%" alt="05 / My toolbox — Tools I build with." />
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/toolbox-dark.svg" />
+  <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/toolbox-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/toolbox-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/toolbox-dark.svg" />
   <img src="assets/toolbox-light.svg" width="100%" alt="JavaScript, React, Node.js, Python, FastAPI, PostgreSQL, MongoDB, Docker, LLMs, AI agents, n8n, Git" />
 </picture>
 
 <br/><br/>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/h-contact-dark.svg" />
+  <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/h-contact-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/h-contact-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/h-contact-dark.svg" />
   <img src="assets/h-contact-light.svg" width="100%" alt="06 / Let’s connect — Get in touch." />
 </picture>
 
 <a href="mailto:saadnazir099@gmail.com">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/contact-dark.svg" />
+    <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/contact-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/contact-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/contact-dark.svg" />
     <img src="assets/contact-light.svg" width="100%" alt="Contact me about a role or project: saadnazir099@gmail.com" />
   </picture>
 </a>
