@@ -45,20 +45,59 @@ class ProfileAssetCheckerTests(unittest.TestCase):
 
     def test_ignores_fenced_and_inline_code_examples(self):
         readme = """
-```markdown
+\`\`\`markdown
 [Fake link](missing-fenced.md)
+[Fake reference]: missing-fenced-reference.md
+[Fake reference]
 <a href="missing-fenced.html">Fake HTML</a>
-```
+\`\`\`
 
 ~~~html
 <img src="missing-image.svg" />
 ~~~
 
-Inline example: `[not a link](missing-inline.md)`.
+Inline example: \`[not a link](missing-inline.md)\`.
 
 [Real link](docs/real.md)
 """
         self.assertEqual({"docs/real.md"}, collect_local_references(readme))
+
+    def test_collects_nested_bracket_labels_and_images(self):
+        readme = r"""
+[Read [the guide] carefully](docs/guide.md)
+![Preview [dark mode]](assets/preview.svg)
+[Escaped \[label\]](docs/escaped-label.md)
+"""
+        self.assertEqual(
+            {
+                "docs/guide.md",
+                "assets/preview.svg",
+                "docs/escaped-label.md",
+            },
+            collect_local_references(readme),
+        )
+
+    def test_collects_full_collapsed_and_shortcut_reference_links(self):
+        readme = """
+[Guide]: docs/guide.md "Guide title"
+[Badge]: <assets/badge (blue).svg>
+[guide text][Guide]
+[Guide][]
+[Guide]
+![status][Badge]
+[Missing reference][not-defined]
+"""
+        self.assertEqual(
+            {"docs/guide.md", "assets/badge (blue).svg"},
+            collect_local_references(readme),
+        )
+
+    def test_reference_labels_ignore_case_and_collapse_whitespace(self):
+        readme = """
+[API   Guide]: docs/api.md
+[Read the API guide][ api guide ]
+"""
+        self.assertEqual({"docs/api.md"}, collect_local_references(readme))
 
     def test_reports_missing_and_escaping_paths_but_accepts_existing_files(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
