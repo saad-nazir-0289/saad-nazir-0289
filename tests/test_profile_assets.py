@@ -62,6 +62,9 @@ class ProfileAssetCheckerTests(unittest.TestCase):
 [Fake link](missing-fenced.md)
 [Fake reference]: missing-fenced-reference.md
 [Fake reference]
+[Fake multiline]:
+  missing-fenced-multiline.md
+[Fake multiline]
 <a href="missing-fenced.html">Fake HTML</a>
 ```
 
@@ -111,6 +114,40 @@ Inline example: `[not a link](missing-inline.md)`.
 [Read the API guide][ api guide ]
 """
         self.assertEqual({"docs/api.md"}, collect_local_references(readme))
+
+    def test_collects_multiline_reference_definitions(self):
+        readme = """
+[API Guide]:
+    docs/api.md
+    "API reference"
+
+[Project
+  Guide]: <assets/project guide.svg>
+[API Guide]
+[Project Guide]
+
+[Long title]: docs/long-title.md
+  "A title that
+  spans multiple lines"
+[Long title]
+"""
+        self.assertEqual(
+            {
+                "docs/api.md",
+                "assets/project guide.svg",
+                "docs/long-title.md",
+            },
+            collect_local_references(readme),
+        )
+
+    def test_rejects_reference_definition_with_blank_line_before_destination(self):
+        readme = """
+[Broken]:
+
+  missing.md
+[Broken]
+"""
+        self.assertEqual(set(), collect_local_references(readme))
 
     def test_reports_missing_and_escaping_paths_but_accepts_existing_files(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
