@@ -118,6 +118,8 @@ def _parse_destination(text: str, start: int) -> str | None:
     if text[start] == "<":
         index = start + 1
         while index < len(text):
+            if text[index] in "\r\n":
+                return None
             if text[index] == ">" and not _is_escaped(text, index):
                 return MARKDOWN_ESCAPABLE.sub(r"\1", text[start + 1:index])
             index += 1
@@ -146,32 +148,65 @@ def _parse_destination(text: str, start: int) -> str | None:
     return MARKDOWN_ESCAPABLE.sub(r"\1", destination)
 
 
+def _skip_reference_whitespace(text: str, start: int) -> int | None:
+    """Skip optional horizontal whitespace and at most one line ending."""
+    index = start
+    while index < len(text) and text[index] in " \t":
+        index += 1
+
+    if text.startswith("\r\n", index):
+        index += 2
+    elif index < len(text) and text[index] in "\r\n":
+        index += 1
+    else:
+        return index
+
+    while index < len(text) and text[index] in " \t":
+        index += 1
+    if index < len(text) and text[index] in "\r\n":
+        return None
+    return index
+
+
 def _reference_definitions(readme_text: str) -> dict[str, str]:
-    """Collect reference-style link definitions and their destinations."""
+    """Collect reference definitions, including labels and destinations split across lines."""
     definitions: dict[str, str] = {}
+    line_start = 0
 
-    for line in readme_text.splitlines():
-        indentation = len(line) - len(line.lstrip(" "))
-        if indentation > 3:
-            continue
+    for line in readme_text.splitlines(keepends=True):
+        line_content = line.rstrip("\r\n")
+        indentation = len(line_content) - len(line_content.lstrip(" "))
 
-        opening_index = indentation
-        if opening_index >= len(line) or line[opening_index] != "[":
-            continue
+        if indentation <= 3 and indentation < len(line_content):
+            opening_index = line_start + indentation
+            if line_content[indentation] == "[":
+                closing_index = _matching_bracket_end(readme_text, opening_index)
+                if closing_index is not None:
+                    label_text = readme_text[opening_index + 1:closing_index]
+                    normalized = _normalize_reference_label(label_text)
+                    has_blank_line = re.search(
+                        r"(?:\r\n|\r|\n)[ \t]*(?:\r\n|\r|\n)",
+                        label_text,
+                    )
+                    colon_index = closing_index + 1
 
-        closing_index = _matching_bracket_end(line, opening_index)
-        if closing_index is None or closing_index + 1 >= len(line):
-            continue
-        if line[closing_index + 1] != ":":
-            continue
+                    if (
+                        normalized
+                        and not has_blank_line
+                        and colon_index < len(readme_text)
+                        and readme_text[colon_index] == ":"
+                    ):
+                        destination_start = _skip_reference_whitespace(
+                            readme_text, colon_index + 1
+                        )
+                        if destination_start is not None:
+                            destination = _parse_destination(
+                                readme_text, destination_start
+                            )
+                            if destination is not None:
+                                definitions.setdefault(normalized, destination)
 
-        label = _normalize_reference_label(line[opening_index + 1:closing_index])
-        if not label:
-            continue
-
-        destination = _parse_destination(line, closing_index + 2)
-        if destination:
-            definitions.setdefault(label, destination)
+        line_start += len(line)
 
     return definitions
 
