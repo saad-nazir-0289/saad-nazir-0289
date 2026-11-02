@@ -27,8 +27,7 @@ class LocalReferenceParser(HTMLParser):
             if name in {"href", "src"}:
                 candidates = [value]
             elif name == "srcset":
-                # "a.svg, b.svg 2x": each comma-separated entry is a URL plus an optional descriptor.
-                candidates = [entry.split()[0] for entry in value.split(",") if entry.strip()]
+                candidates = _srcset_urls(value)
             else:
                 continue
 
@@ -36,6 +35,46 @@ class LocalReferenceParser(HTMLParser):
                 path = _local_path(candidate)
                 if path:
                     self.paths.append(path)
+
+
+def _srcset_urls(value: str) -> list[str]:
+    """Split srcset candidates while preserving commas inside each URL."""
+    urls: list[str] = []
+    index = 0
+
+    while index < len(value):
+        while index < len(value) and (value[index].isspace() or value[index] == ","):
+            index += 1
+        if index >= len(value):
+            break
+
+        start = index
+        while index < len(value) and not value[index].isspace():
+            index += 1
+        url = value[start:index]
+
+        if url.endswith(","):
+            url = url.rstrip(",")
+            if url:
+                urls.append(url)
+            continue
+
+        if url:
+            urls.append(url)
+
+        in_parentheses = False
+        while index < len(value):
+            char = value[index]
+            if char == "(":
+                in_parentheses = True
+            elif char == ")":
+                in_parentheses = False
+            elif char == "," and not in_parentheses:
+                index += 1
+                break
+            index += 1
+
+    return urls
 
 
 def _without_code_examples(readme_text: str) -> str:
