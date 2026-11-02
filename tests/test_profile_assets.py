@@ -33,11 +33,13 @@ class ProfileAssetCheckerTests(unittest.TestCase):
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg" />
   <source srcset="assets/wide.svg 2x, https://example.com/remote.svg 1x" />
+  <source srcset="data:image/svg+xml,%3Csvg%3E 1x, assets/chart,final.svg 2x" />
+  <source srcset="assets/first.svg, assets/second.svg" />
   <img src="assets/header-light.svg" alt="Header" />
 </picture>
 """
         self.assertEqual(
-            {"assets/header-dark.svg", "assets/wide.svg", "assets/header-light.svg"},
+            {"assets/header-dark.svg", "assets/wide.svg", "assets/chart,final.svg", "assets/first.svg", "assets/second.svg", "assets/header-light.svg"},
             collect_local_references(readme),
         )
 
