@@ -1,4 +1,5 @@
 # Runtime dependencies for scripts/design/build.py (Python >=3.11).
 uharfbuzz==0.57.0
 fonttools==4.68.0
+Brotli==1.2.0
 Pillow==13.0.0
