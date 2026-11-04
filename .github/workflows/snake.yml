@@ -7,8 +7,7 @@ on:
     paths-ignore:
       - "scripts/**"
       - "tests/**"
-      - ".github/workflows/profile-assets.yml"
-      - ".github/workflows/snake.yml"
+      - ".github/workflows/**"
   schedule:
     - cron: "0 */12 * * *"
   workflow_dispatch:
