@@ -621,15 +621,25 @@ def m_contact(c, theme, email):
 
 
 def main():
+    global OUT
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", required=True, type=Path, help="checkout of saad-nazir-0289/Saad-Portfolio")
-    site = ap.parse_args().site.resolve()
+    ap.add_argument(
+        "--output",
+        type=Path,
+        default=OUT,
+        help="directory for generated SVGs (defaults to this repository's assets/)",
+    )
+    args = ap.parse_args()
+    site = args.site.resolve()
+    OUT = args.output.resolve()
     gen = site / "src" / "generated"
     projects = json.loads((gen / "projects.json").read_text())
     posts = json.loads((gen / "blogs.json").read_text())
     icons = json.loads((HERE / "icons.json").read_text())
     pub = site / "public"
-    OUT.mkdir(exist_ok=True)
+    OUT.mkdir(parents=True, exist_ok=True)
 
     portrait = embed(pub / "saad-portrait.png", 260, 300, focus=.3)
     covers = {"mill-ledger": embed(pub / "case-studies/mill-ledger/home-thumbnail.png", 400, 225),

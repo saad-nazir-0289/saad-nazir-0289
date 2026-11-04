@@ -4,12 +4,14 @@ on:
   pull_request:
     paths:
       - "scripts/design/**"
+      - "tests/test_design_builder.py"
       - ".github/workflows/design-builder.yml"
   push:
     branches:
       - main
     paths:
       - "scripts/design/**"
+      - "tests/test_design_builder.py"
       - ".github/workflows/design-builder.yml"
   workflow_dispatch:
 
@@ -32,3 +34,5 @@ jobs:
         run: python -m pip install -r scripts/design/requirements.txt
       - name: Check builder imports and CLI
         run: python scripts/design/build.py --help
+      - name: Exercise artwork generation with a synthetic site fixture
+        run: python -m unittest discover --start-directory tests --pattern "test_design_builder.py"

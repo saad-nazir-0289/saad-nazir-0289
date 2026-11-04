@@ -40,4 +40,12 @@ Pass the path to a local checkout of the portfolio site. The builder reads its g
 python scripts/design/build.py --site ../Saad-Portfolio
 ```
 
-The builder only reads from the supplied site directory. Review the generated asset changes with `git diff -- assets/` before committing them.
+The builder only reads from the supplied site directory. By default, it writes SVGs into this repository's `assets/` directory. Use `--output` to preview a build without replacing the tracked artwork:
+
+```bash
+python scripts/design/build.py --site ../Saad-Portfolio --output ../profile-artwork-preview
+```
+
+Review the generated asset changes with `git diff -- assets/` before committing them.
+
+The artwork-builder workflow also runs a full generation test against a synthetic local site fixture, so it does not need a checkout of the portfolio repository.
