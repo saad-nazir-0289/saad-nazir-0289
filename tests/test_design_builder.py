@@ -14,78 +14,79 @@ BUILDER = ROOT / "scripts" / "design" / "build.py"
 
 
 class DesignBuilderIntegrationTests(unittest.TestCase):
+    def create_site_fixture(self, site):
+        generated = site / "src" / "generated"
+        public = site / "public"
+        generated.mkdir(parents=True)
+
+        projects = [
+            {
+                "slug": "mill-ledger",
+                "category": "PRODUCT ENGINEERING",
+                "client": "Fixture client",
+                "title": "MillLedger",
+                "summary": "Offline accounting for daily mill transactions.",
+                "stack": ["Electron", "React", "TypeScript", "SQLite"],
+                "inProgress": False,
+                "draft": False,
+            },
+            {
+                "slug": "ucp-noticeboard",
+                "category": "CAMPUS SOFTWARE",
+                "client": "Fixture university",
+                "title": "UCP Noticeboard",
+                "summary": "A searchable feed of campus announcements.",
+                "stack": ["React", "TypeScript", "ASP.NET Core"],
+                "inProgress": False,
+                "draft": False,
+            },
+        ]
+        posts = [
+            {
+                "date": "2026-01-02",
+                "category": "ENGINEERING",
+                "readingTime": 4,
+                "title": "Fixture article",
+                "summary": "A synthetic article used to verify generated artwork.",
+            }
+        ]
+        (generated / "projects.json").write_text(json.dumps(projects), encoding="utf-8")
+        (generated / "blogs.json").write_text(json.dumps(posts), encoding="utf-8")
+
+        image_paths = [
+            public / "saad-portrait.png",
+            public / "case-studies" / "mill-ledger" / "home-thumbnail.png",
+            public / "case-studies" / "ucp-noticeboard" / "home-thumbnail.png",
+        ]
+        for index, image_path in enumerate(image_paths):
+            image_path.parent.mkdir(parents=True, exist_ok=True)
+            Image.new("RGB", (32, 24), (40 + index * 30, 80, 120)).save(image_path)
+        return generated, public
+
+    def run_builder(self, site, output):
+        return subprocess.run(
+            [
+                sys.executable,
+                str(BUILDER),
+                "--site",
+                str(site),
+                "--output",
+                str(output),
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
     def test_generates_valid_light_and_dark_assets_in_requested_directory(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             temp_root = Path(temporary_directory)
             site = temp_root / "fixture-site"
-            generated = site / "src" / "generated"
-            public = site / "public"
-            generated.mkdir(parents=True)
-
-            projects = [
-                {
-                    "slug": "mill-ledger",
-                    "category": "PRODUCT ENGINEERING",
-                    "client": "Fixture client",
-                    "title": "MillLedger",
-                    "summary": "Offline accounting for daily mill transactions.",
-                    "stack": ["Electron", "React", "TypeScript", "SQLite"],
-                    "inProgress": False,
-                    "draft": False,
-                },
-                {
-                    "slug": "ucp-noticeboard",
-                    "category": "CAMPUS SOFTWARE",
-                    "client": "Fixture university",
-                    "title": "UCP Noticeboard",
-                    "summary": "A searchable feed of campus announcements.",
-                    "stack": ["React", "TypeScript", "ASP.NET Core"],
-                    "inProgress": False,
-                    "draft": False,
-                },
-            ]
-            posts = [
-                {
-                    "date": "2026-01-02",
-                    "category": "ENGINEERING",
-                    "readingTime": 4,
-                    "title": "Fixture article",
-                    "summary": "A synthetic article used to verify generated artwork.",
-                }
-            ]
-            (generated / "projects.json").write_text(
-                json.dumps(projects), encoding="utf-8"
-            )
-            (generated / "blogs.json").write_text(
-                json.dumps(posts), encoding="utf-8"
-            )
-
-            image_paths = [
-                public / "saad-portrait.png",
-                public / "case-studies" / "mill-ledger" / "home-thumbnail.png",
-                public / "case-studies" / "ucp-noticeboard" / "home-thumbnail.png",
-            ]
-            for index, image_path in enumerate(image_paths):
-                image_path.parent.mkdir(parents=True, exist_ok=True)
-                Image.new("RGB", (32, 24), (40 + index * 30, 80, 120)).save(
-                    image_path
-                )
+            self.create_site_fixture(site)
 
             output = temp_root / "artwork-preview"
-            result = subprocess.run(
-                [
-                    sys.executable,
-                    str(BUILDER),
-                    "--site",
-                    str(site),
-                    "--output",
-                    str(output),
-                ],
-                cwd=ROOT,
-                capture_output=True,
-                text=True,
-                check=False,
-            )
+            result = self.run_builder(site, output)
 
             self.assertEqual(0, result.returncode, msg=result.stderr or result.stdout)
             svg_files = sorted(output.glob("*.svg"))
@@ -113,10 +114,88 @@ class DesignBuilderIntegrationTests(unittest.TestCase):
             for svg_path in svg_files:
                 with self.subTest(svg=svg_path.name):
                     root = ET.parse(svg_path).getroot()
-                    self.assertEqual(
-                        "{http://www.w3.org/2000/svg}svg",
-                        root.tag,
-                    )
+                    self.assertEqual("{http://www.w3.org/2000/svg}svg", root.tag)
+
+    def test_rejects_missing_required_project_before_writing_output(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            temp_root = Path(temporary_directory)
+            site = temp_root / "fixture-site"
+            generated, _ = self.create_site_fixture(site)
+            projects_path = generated / "projects.json"
+            projects = json.loads(projects_path.read_text(encoding="utf-8"))
+            projects = [project for project in projects if project["slug"] != "mill-ledger"]
+            projects_path.write_text(json.dumps(projects), encoding="utf-8")
+
+            output = temp_root / "artwork-preview"
+            result = self.run_builder(site, output)
+
+            self.assertEqual(2, result.returncode)
+            self.assertIn("Missing required project slug: mill-ledger", result.stderr)
+            self.assertFalse(output.exists())
+
+    def test_rejects_missing_project_field_before_writing_output(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            temp_root = Path(temporary_directory)
+            site = temp_root / "fixture-site"
+            generated, _ = self.create_site_fixture(site)
+            projects_path = generated / "projects.json"
+            projects = json.loads(projects_path.read_text(encoding="utf-8"))
+            projects[0].pop("summary")
+            projects_path.write_text(json.dumps(projects), encoding="utf-8")
+
+            output = temp_root / "artwork-preview"
+            result = self.run_builder(site, output)
+
+            self.assertEqual(2, result.returncode)
+            self.assertIn(
+                "Project 'mill-ledger' must contain a non-empty 'summary' string",
+                result.stderr,
+            )
+            self.assertFalse(output.exists())
+
+    def test_rejects_missing_image_before_writing_output(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            temp_root = Path(temporary_directory)
+            site = temp_root / "fixture-site"
+            _, public = self.create_site_fixture(site)
+            (public / "saad-portrait.png").unlink()
+
+            output = temp_root / "artwork-preview"
+            result = self.run_builder(site, output)
+
+            self.assertEqual(2, result.returncode)
+            self.assertIn("Missing portrait image", result.stderr)
+            self.assertFalse(output.exists())
+
+    def test_rejects_blog_cover_path_outside_public_directory(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            temp_root = Path(temporary_directory)
+            site = temp_root / "fixture-site"
+            generated, _ = self.create_site_fixture(site)
+            posts_path = generated / "blogs.json"
+            posts = json.loads(posts_path.read_text(encoding="utf-8"))
+            posts[0]["cover"] = {"src": "/../../outside.png"}
+            posts_path.write_text(json.dumps(posts), encoding="utf-8")
+
+            output = temp_root / "artwork-preview"
+            result = self.run_builder(site, output)
+
+            self.assertEqual(2, result.returncode)
+            self.assertIn("must resolve inside the site's public directory", result.stderr)
+            self.assertFalse(output.exists())
+
+    def test_rejects_output_directory_inside_supplied_site(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            temp_root = Path(temporary_directory)
+            site = temp_root / "fixture-site"
+            self.create_site_fixture(site)
+
+            output = site / "artwork-preview"
+            result = self.run_builder(site, output)
+
+            self.assertEqual(2, result.returncode)
+            self.assertIn("--output must be outside --site", result.stderr)
+            self.assertFalse(output.exists())
 
 
 if __name__ == "__main__":

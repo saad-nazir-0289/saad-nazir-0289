@@ -15,6 +15,7 @@ import html
 import io
 import json
 import re
+from datetime import date
 from functools import lru_cache
 from pathlib import Path
 
@@ -620,6 +621,164 @@ def m_contact(c, theme, email):
     write("contact-mobile", theme, svg(N, H, "".join(b), f"Email {email}"))
 
 
+
+def _read_json(path, label):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError as exc:
+        raise ValueError(f"Missing {label}: {path}") from exc
+    except json.JSONDecodeError as exc:
+        raise ValueError(
+            f"Invalid JSON in {label} at line {exc.lineno}, column {exc.colno}: {exc.msg}"
+        ) from exc
+    except (OSError, UnicodeError) as exc:
+        raise ValueError(f"Cannot read {label} at {path}: {exc}") from exc
+
+
+def _require_text(record, field, label):
+    value = record.get(field)
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{label} must contain a non-empty '{field}' string")
+
+
+def _validate_image(path, label, public_root):
+    resolved_root = public_root.resolve()
+    resolved_path = path.resolve()
+    if not resolved_path.is_relative_to(resolved_root):
+        raise ValueError(
+            f"{label} must resolve inside the site's public directory: {path}"
+        )
+    if not resolved_path.is_file():
+        raise ValueError(f"Missing {label}: {path}")
+    try:
+        with Image.open(resolved_path) as image:
+            image.verify()
+    except Exception as exc:
+        raise ValueError(f"Invalid {label}: {path} ({exc})") from exc
+
+
+def validate_site_inputs(site, output):
+    """Validate source data and images before creating or writing output files."""
+    site = Path(site).resolve()
+    output = Path(output).resolve()
+    if output == site or output.is_relative_to(site):
+        raise ValueError(
+            "--output must be outside --site so the builder never writes "
+            f"into the supplied site: {output}"
+        )
+
+    generated = site / "src" / "generated"
+    projects = _read_json(generated / "projects.json", "project data")
+    posts = _read_json(generated / "blogs.json", "blog data")
+    icons = _read_json(HERE / "icons.json", "builder icon data")
+
+    if not isinstance(projects, list):
+        raise ValueError("Project data must be a JSON array")
+    if not isinstance(posts, list):
+        raise ValueError("Blog data must be a JSON array")
+    if not isinstance(icons, dict):
+        raise ValueError("Builder icon data must be a JSON object")
+
+    projects_by_slug = {}
+    for index, project in enumerate(projects, start=1):
+        label = f"Project #{index}"
+        if not isinstance(project, dict):
+            raise ValueError(f"{label} must be a JSON object")
+        _require_text(project, "slug", label)
+        slug = project["slug"]
+        if slug in projects_by_slug:
+            raise ValueError(f"Duplicate project slug: {slug}")
+        projects_by_slug[slug] = project
+
+    required_slugs = ("mill-ledger", "ucp-noticeboard")
+    for slug in required_slugs:
+        project = projects_by_slug.get(slug)
+        if project is None:
+            raise ValueError(f"Missing required project slug: {slug}")
+        for field in ("category", "client", "title", "summary"):
+            _require_text(project, field, f"Project '{slug}'")
+        stack = project.get("stack")
+        if not isinstance(stack, list) or not stack or any(
+            not isinstance(item, str) or not item.strip() for item in stack
+        ):
+            raise ValueError(
+                f"Project '{slug}' must contain a non-empty string array in 'stack'"
+            )
+
+    tools = icons.get("tools")
+    if not isinstance(tools, list) or len(tools) != 12:
+        raise ValueError("Builder icon data must contain exactly 12 tool icon entries")
+    for index, entry in enumerate(tools, start=1):
+        if (
+            not isinstance(entry, list)
+            or len(entry) != 2
+            or any(not isinstance(value, str) or not value.strip() for value in entry)
+            or not entry[1].lstrip().startswith("<svg")
+        ):
+            raise ValueError(
+                f"Tool icon entry #{index} must contain a name and SVG string"
+            )
+
+    project_icons = icons.get("projectIcons")
+    if not isinstance(project_icons, dict):
+        raise ValueError("Builder icon data must contain a 'projectIcons' object")
+    for slug in required_slugs:
+        icon = project_icons.get(slug)
+        if not isinstance(icon, str) or not icon.lstrip().startswith("<svg"):
+            raise ValueError(f"Missing or invalid project icon for '{slug}'")
+
+    public = site / "public"
+    required_images = (
+        (public / "saad-portrait.png", "portrait image"),
+        (
+            public / "case-studies" / "mill-ledger" / "home-thumbnail.png",
+            "MillLedger thumbnail",
+        ),
+        (
+            public / "case-studies" / "ucp-noticeboard" / "home-thumbnail.png",
+            "UCP Noticeboard thumbnail",
+        ),
+    )
+    for path, label in required_images:
+        _validate_image(path, label, public)
+
+    for index, post in enumerate(posts, start=1):
+        label = f"Blog post #{index}"
+        if not isinstance(post, dict):
+            raise ValueError(f"{label} must be a JSON object")
+        for field in ("date", "category", "title", "summary"):
+            _require_text(post, field, label)
+        post_date = post["date"]
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", post_date):
+            raise ValueError(f"{label} date must use YYYY-MM-DD format")
+        try:
+            date.fromisoformat(post_date)
+        except ValueError as exc:
+            raise ValueError(
+                f"{label} contains an invalid calendar date: {post_date}"
+            ) from exc
+        reading_time = post.get("readingTime")
+        if (
+            isinstance(reading_time, bool)
+            or not isinstance(reading_time, int)
+            or reading_time < 1
+        ):
+            raise ValueError(f"{label} 'readingTime' must be a positive integer")
+
+        cover = post.get("cover")
+        if cover is not None:
+            if not isinstance(cover, dict):
+                raise ValueError(
+                    f"{label} 'cover' must be an object with a 'src' path"
+                )
+            _require_text(cover, "src", f"{label} cover")
+            cover_path = public / cover["src"].lstrip("/")
+            _validate_image(cover_path, f"{label} cover image", public)
+
+    return projects, posts, icons
+
+
+
 def main():
     global OUT
 
@@ -634,10 +793,10 @@ def main():
     args = ap.parse_args()
     site = args.site.resolve()
     OUT = args.output.resolve()
-    gen = site / "src" / "generated"
-    projects = json.loads((gen / "projects.json").read_text())
-    posts = json.loads((gen / "blogs.json").read_text())
-    icons = json.loads((HERE / "icons.json").read_text())
+    try:
+        projects, posts, icons = validate_site_inputs(site, OUT)
+    except ValueError as exc:
+        ap.error(str(exc))
     pub = site / "public"
     OUT.mkdir(parents=True, exist_ok=True)
 

@@ -48,4 +48,6 @@ python scripts/design/build.py --site ../Saad-Portfolio --output ../profile-artw
 
 Review the generated asset changes with `git diff -- assets/` before committing them.
 
+Before writing any SVGs, the builder validates the featured project records, blog metadata, icon entries and required images. Referenced images must resolve inside the supplied site's `public/` directory, and the output directory must remain outside the site. Missing or malformed inputs are reported before generation starts.
+
 The artwork-builder workflow also runs a full generation test against a synthetic local site fixture, so it does not need a checkout of the portfolio repository.
