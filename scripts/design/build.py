@@ -815,7 +815,7 @@ def main():
         y, m, d = post["date"].split("-")
         post["dateLabel"] = f"{months[int(m) - 1]} {int(d)}, {y}"
 
-    headings = [("work", "01 / SELECTED WORK", "Selected projects", "."),
+    headings = [("work", "01 / RECENT WORK", "Recent projects", "."),
                 ("about", "02 / A LITTLE ABOUT ME", "About", "me."),
                 ("now", "03 / IN PROGRESS", "Currently", "building."),
                 ("blog", "04 / WRITING", "Latest from the", "blog."),
