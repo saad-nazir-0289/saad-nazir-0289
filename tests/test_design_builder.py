@@ -1,3 +1,5 @@
+import base64
+import io
 import json
 import subprocess
 import sys
@@ -79,6 +81,76 @@ class DesignBuilderIntegrationTests(unittest.TestCase):
             check=False,
         )
 
+    def assert_svg_accessibility(self, svg_path):
+        svg_namespace = "{http://www.w3.org/2000/svg}"
+        xlink_href = "{http://www.w3.org/1999/xlink}href"
+        root = ET.parse(svg_path).getroot()
+        self.assertEqual(f"{svg_namespace}svg", root.tag)
+
+        title = root.find(f"{svg_namespace}title")
+        self.assertIsNotNone(title, f"{svg_path.name} has no SVG title")
+        title_text = (title.text or "").strip() if title is not None else ""
+        self.assertTrue(title_text, f"{svg_path.name} has an empty SVG title")
+
+        aria_label = root.attrib.get("aria-label", "").strip()
+        self.assertTrue(aria_label, f"{svg_path.name} has no accessible label")
+        self.assertEqual(
+            " ".join(title_text.split()),
+            " ".join(aria_label.split()),
+            f"{svg_path.name} title and label differ",
+        )
+        self.assertEqual(
+            "img",
+            root.attrib.get("role"),
+            f"{svg_path.name} is not exposed as an image",
+        )
+
+        images = root.findall(f".//{svg_namespace}image")
+        for image in images:
+            href = image.attrib.get("href") or image.attrib.get(xlink_href)
+            self.assertTrue(
+                href,
+                f"{svg_path.name} contains an image without a source",
+            )
+            if not href:
+                continue
+
+            header, separator, payload = href.partition(",")
+            self.assertTrue(
+                separator,
+                f"{svg_path.name} contains a malformed image data URI",
+            )
+            self.assertTrue(
+                header.startswith("data:image/"),
+                f"{svg_path.name} contains a non-embedded image",
+            )
+            self.assertTrue(
+                header.endswith(";base64"),
+                f"{svg_path.name} contains a non-base64 image URI",
+            )
+            if (
+                not separator
+                or not header.startswith("data:image/")
+                or not header.endswith(";base64")
+            ):
+                continue
+
+            decoded = base64.b64decode(payload, validate=True)
+            self.assertGreater(
+                len(decoded),
+                0,
+                f"{svg_path.name} contains an empty embedded image",
+            )
+            with Image.open(io.BytesIO(decoded)) as embedded:
+                self.assertEqual(
+                    header[5:].split(";", 1)[0],
+                    f"image/{embedded.format.lower()}",
+                    f"{svg_path.name} image MIME type does not match its data",
+                )
+                embedded.verify()
+
+        return len(images)
+
     def test_generates_valid_light_and_dark_assets_in_requested_directory(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             temp_root = Path(temporary_directory)
@@ -111,10 +183,15 @@ class DesignBuilderIntegrationTests(unittest.TestCase):
                         f"Missing {name}-{theme}.svg",
                     )
 
+            embedded_image_count = 0
             for svg_path in svg_files:
                 with self.subTest(svg=svg_path.name):
-                    root = ET.parse(svg_path).getroot()
-                    self.assertEqual("{http://www.w3.org/2000/svg}svg", root.tag)
+                    embedded_image_count += self.assert_svg_accessibility(svg_path)
+            self.assertGreater(
+                embedded_image_count,
+                0,
+                "Expected generated artwork to contain embedded images",
+            )
 
     def test_rejects_missing_required_project_before_writing_output(self):
         with tempfile.TemporaryDirectory() as temporary_directory:

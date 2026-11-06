@@ -51,3 +51,5 @@ Review the generated asset changes with `git diff -- assets/` before committing 
 Before writing any SVGs, the builder validates the featured project records, blog metadata, icon entries and required images. Referenced images must resolve inside the supplied site's `public/` directory, and the output directory must remain outside the site. Missing or malformed inputs are reported before generation starts.
 
 The artwork-builder workflow also runs a full generation test against a synthetic local site fixture, so it does not need a checkout of the portfolio repository.
+
+The generation integration test also checks that every SVG has a non-empty `<title>`, `role="img"` and a matching `aria-label`. Embedded `<image>` elements must use valid base64 data URIs whose MIME types match the decoded image data.
