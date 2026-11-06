@@ -21,7 +21,7 @@
 
 <picture>
   <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/h-work-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/h-work-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/h-work-dark.svg" />
-  <img src="assets/h-work-light.svg" width="100%" alt="01 / Selected work — Selected projects." />
+  <img src="assets/h-work-light.svg" width="100%" alt="01 / Recent work — Recent projects." />
 </picture>
 
 <a href="https://saadnazir.msndev.workers.dev/work/mill-ledger/">
