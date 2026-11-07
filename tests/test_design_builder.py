@@ -1,4 +1,5 @@
 import base64
+import importlib.util
 import io
 import json
 import subprocess
@@ -13,6 +14,69 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "design" / "build.py"
+BUILDER_SPEC = importlib.util.spec_from_file_location("profile_design_builder", BUILDER)
+if BUILDER_SPEC is None or BUILDER_SPEC.loader is None:
+    raise RuntimeError("Could not load the profile artwork builder for palette tests")
+DESIGN_BUILDER = importlib.util.module_from_spec(BUILDER_SPEC)
+BUILDER_SPEC.loader.exec_module(DESIGN_BUILDER)
+
+
+def contrast_ratio(first, second):
+    def luminance(color):
+        if len(color) != 7 or not color.startswith("#"):
+            raise ValueError(f"Expected a six-digit hex color, got {color!r}")
+        channels = [int(color[index:index + 2], 16) / 255 for index in (1, 3, 5)]
+        linear = [
+            channel / 12.92 if channel <= 0.04045
+            else ((channel + 0.055) / 1.055) ** 2.4
+            for channel in channels
+        ]
+        return sum(
+            channel * weight
+            for channel, weight in zip(linear, (0.2126, 0.7152, 0.0722))
+        )
+
+    lighter, darker = sorted((luminance(first), luminance(second)), reverse=True)
+    return (lighter + 0.05) / (darker + 0.05)
+
+
+class DesignPaletteAccessibilityTests(unittest.TestCase):
+    def test_text_color_combinations_meet_wcag_aa(self):
+        # Cover readable text on the canvas, cards, project panels and buttons.
+        text_pairs = (
+            ("ink", "bg"),
+            ("muted", "bg"),
+            ("accent", "bg"),
+            ("ink", "card"),
+            ("muted", "card"),
+            ("accent", "card"),
+            ("ink", "soft"),
+            ("muted", "soft"),
+            ("note", "soft"),
+            ("ink", "warm"),
+            ("muted", "warm"),
+            ("note", "warm"),
+            ("buttonText", "button"),
+            ("heroText", "hero"),
+        )
+
+        for theme_name, palette in DESIGN_BUILDER.THEMES.items():
+            for foreground_key, background_key in text_pairs:
+                with self.subTest(
+                    theme=theme_name,
+                    foreground=foreground_key,
+                    background=background_key,
+                ):
+                    ratio = contrast_ratio(
+                        palette[foreground_key],
+                        palette[background_key],
+                    )
+                    self.assertGreaterEqual(
+                        ratio,
+                        4.5,
+                        f"{theme_name}: {foreground_key} on {background_key} "
+                        f"has a contrast ratio of {ratio:.2f}:1 (requires 4.5:1)",
+                    )
 
 
 class DesignBuilderIntegrationTests(unittest.TestCase):
