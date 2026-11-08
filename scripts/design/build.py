@@ -27,6 +27,9 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
 OUT = ROOT / "assets"
 SITE = "https://saadnazir.msndev.workers.dev"
+PROFILE_TEXT_COLOR = "#ffffff"
+PROFILE_TEXT_SCRIM_COLOR = "#1a0d0a"
+PROFILE_TEXT_SCRIM_OPACITY = 0.72
 
 THEMES = {
     "light": dict(bg="#f9faf7", ink="#23231f", muted="#62645e", accent="#b94424", line="#dce0d6",
@@ -222,8 +225,13 @@ def header(c, theme, portrait):
     b.append(f'<g clip-path="url(#pc)"><image x="{px}" y="{py}" width="{pw}" height="{ph}" preserveAspectRatio="xMidYMid slice" xlink:href="{portrait}"/>'
              f'<rect x="{px}" y="{py}" width="{pw}" height="{ph}" fill="url(#shade)"/></g>'
              f'<rect x="{px + .5}" y="{py + .5}" width="{pw - 1}" height="{ph - 1}" rx="18" fill="none" stroke="#5b1d14" stroke-opacity=".55"/>')
-    b.append(text("Saad Nazir", px + pw / 2, py + 44, 27, "#ffffff", 500, "manrope", -.03, "middle"))
-    b.append(text("Software Engineer | Applied AI", px + pw / 2, py + 66, 11.5, "#ffffff", 600, anchor="middle"))
+    b.append(
+        f'<rect id="profile-text-scrim" x="{px + 14}" y="{py + 14}" width="{pw - 28}" height="70" rx="12" '
+        f'fill="{PROFILE_TEXT_SCRIM_COLOR}" fill-opacity="{PROFILE_TEXT_SCRIM_OPACITY}" '
+        'stroke="#ffffff" stroke-opacity=".18"/>'
+    )
+    b.append(text("Saad Nazir", px + pw / 2, py + 44, 27, PROFILE_TEXT_COLOR, 500, "manrope", -.03, "middle", extra=' id="profile-name"'))
+    b.append(text("Software Engineer | Applied AI", px + pw / 2, py + 66, 11.5, PROFILE_TEXT_COLOR, 600, anchor="middle", extra=' id="profile-role"'))
     bar_y = py + ph - 64
     b.append(f'<rect x="{px + 12}" y="{bar_y}" width="{pw - 24}" height="52" rx="12" fill="#3a1410" fill-opacity=".86" stroke="#ffffff" stroke-opacity=".14"/>')
     b.append(text("@saad-nazir0289", px + 28, bar_y + 23, 12, "#ffffff", 600))

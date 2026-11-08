@@ -40,6 +40,18 @@ def contrast_ratio(first, second):
     return (lighter + 0.05) / (darker + 0.05)
 
 
+def composite_color(foreground, background, opacity):
+    """Composite an SVG foreground color over a background color."""
+    channels = [
+        round(
+            int(foreground[index:index + 2], 16) * opacity
+            + int(background[index:index + 2], 16) * (1 - opacity)
+        )
+        for index in (1, 3, 5)
+    ]
+    return "#" + "".join(f"{channel:02x}" for channel in channels)
+
+
 class DesignPaletteAccessibilityTests(unittest.TestCase):
     def test_text_color_combinations_meet_wcag_aa(self):
         # Cover readable text on the canvas, cards, project panels and buttons.
@@ -80,6 +92,42 @@ class DesignPaletteAccessibilityTests(unittest.TestCase):
 
 
 class DesignBuilderIntegrationTests(unittest.TestCase):
+    def assert_profile_header_text_contrast(self, svg_path):
+        root = ET.parse(svg_path).getroot()
+        scrim = root.find(".//*[@id='profile-text-scrim']")
+        name = root.find(".//*[@id='profile-name']")
+        role = root.find(".//*[@id='profile-role']")
+
+        self.assertIsNotNone(scrim, f"{svg_path.name} has no portrait text scrim")
+        self.assertIsNotNone(name, f"{svg_path.name} has no profile name")
+        self.assertIsNotNone(role, f"{svg_path.name} has no profile role")
+        if scrim is None or name is None or role is None:
+            return
+
+        self.assertEqual(DESIGN_BUILDER.PROFILE_TEXT_SCRIM_COLOR, scrim.attrib.get("fill"))
+        opacity = float(scrim.attrib.get("fill-opacity", "0"))
+        self.assertAlmostEqual(DESIGN_BUILDER.PROFILE_TEXT_SCRIM_OPACITY, opacity)
+        self.assertEqual(DESIGN_BUILDER.PROFILE_TEXT_COLOR, name.attrib.get("fill"))
+        self.assertEqual(DESIGN_BUILDER.PROFILE_TEXT_COLOR, role.attrib.get("fill"))
+
+        elements = list(root)
+        self.assertLess(elements.index(scrim), elements.index(name))
+        self.assertLess(elements.index(name), elements.index(role))
+
+        # White is the brightest possible portrait pixel, so compositing the
+        # scrim over white checks the worst-case contrast for any source photo.
+        worst_case_background = composite_color(
+            DESIGN_BUILDER.PROFILE_TEXT_SCRIM_COLOR,
+            "#ffffff",
+            opacity,
+        )
+        ratio = contrast_ratio(DESIGN_BUILDER.PROFILE_TEXT_COLOR, worst_case_background)
+        self.assertGreaterEqual(
+            ratio,
+            4.5,
+            f"{svg_path.name} portrait text has only {ratio:.2f}:1 contrast",
+        )
+
     def create_site_fixture(self, site):
         generated = site / "src" / "generated"
         public = site / "public"
@@ -256,6 +304,12 @@ class DesignBuilderIntegrationTests(unittest.TestCase):
                 0,
                 "Expected generated artwork to contain embedded images",
             )
+
+            for theme in ("light", "dark"):
+                with self.subTest(profile_header_theme=theme):
+                    self.assert_profile_header_text_contrast(
+                        output / f"header-{theme}.svg"
+                    )
 
     def test_rejects_missing_required_project_before_writing_output(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
