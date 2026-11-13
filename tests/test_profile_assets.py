@@ -4,7 +4,11 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from check_profile_assets import collect_local_references, find_missing_references
+from check_profile_assets import (
+    collect_local_references,
+    find_images_without_alt,
+    find_missing_references,
+)
 
 
 class ProfileAssetCheckerTests(unittest.TestCase):
@@ -150,6 +154,28 @@ Inline example: `[not a link](missing-inline.md)`.
 [Broken]
 """
         self.assertEqual(set(), collect_local_references(readme))
+
+    def test_reports_image_elements_without_alt_attributes(self):
+        readme = """
+<picture>
+  <img src="hero.svg" alt="Profile summary">
+  <img src="diagram.svg">
+  <img src="decorative-divider.svg" alt="">
+</picture>
+"""
+        self.assertEqual([4], find_images_without_alt(readme))
+
+    def test_ignores_image_examples_in_fenced_and_inline_code(self):
+        readme = """
+```html
+<img src="fenced.svg">
+```
+
+Inline example: `<img src="inline.svg">`.
+
+<img src="real.svg" alt="A real image">
+"""
+        self.assertEqual([], find_images_without_alt(readme))
 
     def test_reports_missing_and_escaping_paths_but_accepts_existing_files(self):
         with tempfile.TemporaryDirectory() as temporary_directory:

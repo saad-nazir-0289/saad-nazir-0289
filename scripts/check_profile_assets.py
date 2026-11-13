@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check that local files referenced by the profile README exist."""
+"""Check local README references and HTML image alt attributes."""
 
 import re
 from html.parser import HTMLParser
@@ -35,6 +35,19 @@ class LocalReferenceParser(HTMLParser):
                 path = _local_path(candidate)
                 if path:
                     self.paths.append(path)
+
+
+class MissingImageAltParser(HTMLParser):
+    """Find HTML image elements without an explicit alt attribute."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.missing_alt_lines: list[int] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        has_alt = any(name.lower() == "alt" for name, _ in attrs)
+        if tag.lower() == "img" and not has_alt:
+            self.missing_alt_lines.append(self.getpos()[0])
 
 
 def _srcset_urls(value: str) -> list[str]:
@@ -323,6 +336,13 @@ def collect_local_references(readme_text: str) -> set[str]:
     return references
 
 
+def find_images_without_alt(readme_text: str) -> list[int]:
+    """Return line numbers for HTML image elements missing an alt attribute."""
+    parser = MissingImageAltParser()
+    parser.feed(_without_code_examples(readme_text))
+    return parser.missing_alt_lines
+
+
 def find_missing_references(root: Path, references: set[str]) -> list[str]:
     """Return missing paths and paths that resolve outside the repository root."""
     root = root.resolve()
@@ -345,16 +365,24 @@ def main() -> int:
         print(f"README not found: {README}")
         return 2
 
-    references = collect_local_references(README.read_text(encoding="utf-8"))
+    readme_text = README.read_text(encoding="utf-8")
+    references = collect_local_references(readme_text)
     missing = find_missing_references(ROOT, references)
+    missing_alt = find_images_without_alt(readme_text)
 
-    if missing:
-        print("Missing or unsafe local README references:")
-        for reference in missing:
-            print(f"  - {reference}")
+    if missing or missing_alt:
+        if missing:
+            print("Missing or unsafe local README references:")
+            for reference in missing:
+                print(f"  - {reference}")
+        if missing_alt:
+            print("README images missing alt attributes:")
+            for line_number in missing_alt:
+                print(f"  - line {line_number}")
         return 1
 
     print(f"Checked {len(references)} unique local README references; all exist.")
+    print("All HTML image elements include alt attributes.")
     return 0
 
 
