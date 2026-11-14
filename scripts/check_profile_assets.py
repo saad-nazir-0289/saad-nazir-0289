@@ -90,27 +90,38 @@ def _srcset_urls(value: str) -> list[str]:
     return urls
 
 
+def _blockquote_content(line: str) -> tuple[str, int]:
+    """Return line content and the number of Markdown blockquote markers."""
+    prefix = re.match(r"(?: {0,3}> ?)+", line)
+    if prefix is None:
+        return line, 0
+    return line[prefix.end():], prefix.group(0).count(">")
+
+
 def _without_code_examples(readme_text: str) -> str:
-    """Remove fenced and inline code so examples are not treated as real links."""
+    """Remove fenced and inline code, including fences nested in blockquotes."""
     output: list[str] = []
     fence_char: str | None = None
     fence_length = 0
+    fence_quote_depth = 0
 
     for line in readme_text.splitlines(keepends=True):
+        content, quote_depth = _blockquote_content(line)
         if fence_char is None:
-            opening = FENCE_OPEN_RE.match(line)
+            opening = FENCE_OPEN_RE.match(content)
             if opening:
                 fence = opening.group(1)
                 fence_char, fence_length = fence[0], len(fence)
+                fence_quote_depth = quote_depth
                 output.append("\n" if line.endswith(("\n", "\r")) else "")
                 continue
         else:
             closing = re.match(
                 rf" {{0,3}}{re.escape(fence_char)}{{{fence_length},}}[ \t]*(?:\r?\n)?$",
-                line,
+                content,
             )
-            if closing:
-                fence_char, fence_length = None, 0
+            if quote_depth == fence_quote_depth and closing:
+                fence_char, fence_length, fence_quote_depth = None, 0, 0
             output.append("\n" if line.endswith(("\n", "\r")) else "")
             continue
 
@@ -123,7 +134,6 @@ def _without_code_examples(readme_text: str) -> str:
         ),
         text,
     )
-
 
 def _is_escaped(text: str, index: int) -> bool:
     """Return whether the character at index is preceded by an odd backslash run."""

@@ -84,6 +84,28 @@ Inline example: `[not a link](missing-inline.md)`.
 """
         self.assertEqual({"docs/real.md"}, collect_local_references(readme))
 
+    def test_ignores_fenced_code_examples_inside_blockquotes(self):
+        readme = """
+> Quoted example:
+> \`\`\`html
+> <img src="missing-image.svg">
+> [Fake link](missing-link.md)
+> \`\`\`
+>
+> Nested quote:
+> > ~~~html
+> > <img src="nested-missing.svg">
+> > ~~~
+>
+[Real link](docs/real.md)
+<img src="real-image.svg" alt="Real image">
+"""
+        self.assertEqual(
+            {"docs/real.md", "real-image.svg"},
+            collect_local_references(readme),
+        )
+        self.assertEqual([], find_images_without_alt(readme))
+
     def test_collects_nested_bracket_labels_and_images(self):
         readme = r"""
 [Read [the guide] carefully](docs/guide.md)
