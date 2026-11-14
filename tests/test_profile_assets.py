@@ -87,10 +87,10 @@ Inline example: `[not a link](missing-inline.md)`.
     def test_ignores_fenced_code_examples_inside_blockquotes(self):
         readme = """
 > Quoted example:
-> \`\`\`html
+> ```html
 > <img src="missing-image.svg">
 > [Fake link](missing-link.md)
-> \`\`\`
+> ```
 >
 > Nested quote:
 > > ~~~html
