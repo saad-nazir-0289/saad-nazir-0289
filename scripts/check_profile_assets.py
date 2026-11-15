@@ -99,33 +99,63 @@ def _blockquote_content(line: str) -> tuple[str, int]:
 
 
 def _without_code_examples(readme_text: str) -> str:
-    """Remove fenced and inline code, including fences nested in blockquotes."""
+    """Remove fenced, indented and inline code, including blockquote examples."""
     output: list[str] = []
     fence_char: str | None = None
     fence_length = 0
     fence_quote_depth = 0
+    indented_code_quote_depth: int | None = None
+    previous_blank = True
 
     for line in readme_text.splitlines(keepends=True):
         content, quote_depth = _blockquote_content(line)
+        newline = "\n" if line.endswith(("\n", "\r")) else ""
+
         if fence_char is None:
+            if indented_code_quote_depth is not None:
+                is_blank = not content.strip()
+                is_indented = (
+                    content.startswith("\t") or content.startswith("    ")
+                )
+                if (
+                    quote_depth == indented_code_quote_depth
+                    and (is_blank or is_indented)
+                ):
+                    output.append(newline)
+                    previous_blank = is_blank
+                    continue
+                indented_code_quote_depth = None
+
             opening = FENCE_OPEN_RE.match(content)
             if opening:
                 fence = opening.group(1)
                 fence_char, fence_length = fence[0], len(fence)
                 fence_quote_depth = quote_depth
-                output.append("\n" if line.endswith(("\n", "\r")) else "")
+                output.append(newline)
+                previous_blank = False
+                continue
+
+            if previous_blank and (
+                content.startswith("\t") or content.startswith("    ")
+            ):
+                indented_code_quote_depth = quote_depth
+                output.append(newline)
+                previous_blank = False
                 continue
         else:
             closing = re.match(
                 rf" {{0,3}}{re.escape(fence_char)}{{{fence_length},}}[ \t]*(?:\r?\n)?$",
                 content,
             )
-            if quote_depth == fence_quote_depth and closing:
+            closed = quote_depth == fence_quote_depth and closing is not None
+            if closed:
                 fence_char, fence_length, fence_quote_depth = None, 0, 0
-            output.append("\n" if line.endswith(("\n", "\r")) else "")
+                previous_blank = False
+            output.append(newline)
             continue
 
         output.append(line)
+        previous_blank = not content.strip()
 
     text = "".join(output)
     return INLINE_CODE_RE.sub(

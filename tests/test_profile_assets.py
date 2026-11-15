@@ -106,6 +106,51 @@ Inline example: `[not a link](missing-inline.md)`.
         )
         self.assertEqual([], find_images_without_alt(readme))
 
+    def test_ignores_indented_code_examples(self):
+        readme = """
+Example:
+
+    [Fake link](missing.md)
+    <img src="missing.svg">
+
+Real content:
+[Real link](docs/real.md)
+<img src="real.svg" alt="Real image">
+"""
+        self.assertEqual(
+            {"docs/real.md", "real.svg"},
+            collect_local_references(readme),
+        )
+        self.assertEqual([], find_images_without_alt(readme))
+
+    def test_ignores_indented_code_inside_nested_blockquotes(self):
+        readme = """> Quoted example:
+>
+>     [Fake link](missing.md)
+>     <img src="missing.svg">
+>
+> > Nested quote:
+> >
+> >     <img src="nested.svg">
+>
+[Real link](docs/real.md)
+<img src="real.svg" alt="Real image">
+"""
+        self.assertEqual(
+            {"docs/real.md", "real.svg"},
+            collect_local_references(readme),
+        )
+        self.assertEqual([], find_images_without_alt(readme))
+
+    def test_does_not_treat_indented_paragraph_continuations_as_code(self):
+        readme = """Paragraph starts here
+    [Still a paragraph link](docs/indented.md)
+"""
+        self.assertEqual(
+            {"docs/indented.md"},
+            collect_local_references(readme),
+        )
+
     def test_collects_nested_bracket_labels_and_images(self):
         readme = r"""
 [Read [the guide] carefully](docs/guide.md)
