@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
 FENCE_OPEN_RE = re.compile(r" {0,3}(`{3,}|~{3,})")
 INLINE_CODE_RE = re.compile(r"(?<!`)(`+).*?(?<!`)\1(?!`)", re.DOTALL)
+HTML_COMMENT_RE = re.compile(r"<!--.*?(?:-->|$)", re.DOTALL)
 MARKDOWN_ESCAPABLE = re.compile(r"\\([\\`*_{}\[\]()#+\-.!<>|~])")
 
 
@@ -164,6 +165,17 @@ def _without_code_examples(readme_text: str) -> str:
         ),
         text,
     )
+
+
+def _without_html_comments(readme_text: str) -> str:
+    """Remove HTML comments while preserving line positions."""
+    return HTML_COMMENT_RE.sub(
+        lambda match: "".join(
+            "\n" if char == "\n" else " " for char in match.group(0)
+        ),
+        readme_text,
+    )
+
 
 def _is_escaped(text: str, index: int) -> bool:
     """Return whether the character at index is preceded by an odd backslash run."""
@@ -362,7 +374,7 @@ def _local_path(destination: str) -> str | None:
 
 def collect_local_references(readme_text: str) -> set[str]:
     """Collect local paths from HTML attributes and Markdown links/images."""
-    readme_text = _without_code_examples(readme_text)
+    readme_text = _without_html_comments(_without_code_examples(readme_text))
 
     parser = LocalReferenceParser()
     parser.feed(readme_text)

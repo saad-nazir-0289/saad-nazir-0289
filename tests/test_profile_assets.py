@@ -84,6 +84,31 @@ Inline example: `[not a link](missing-inline.md)`.
 """
         self.assertEqual({"docs/real.md"}, collect_local_references(readme))
 
+    def test_ignores_markdown_destinations_inside_html_comments(self):
+        readme = """<!--
+[Old guide](missing-guide.md)
+[Old reference]: missing-reference.md
+[Old reference]
+![Old image](missing-image.svg)
+-->
+[Current guide](docs/current.md)
+"""
+        self.assertEqual(
+            {"docs/current.md"},
+            collect_local_references(readme),
+        )
+
+    def test_ignores_markdown_destinations_inside_unclosed_html_comments(self):
+        readme = """[Current guide](docs/current.md)
+
+<!--
+[Hidden guide](missing-guide.md)
+"""
+        self.assertEqual(
+            {"docs/current.md"},
+            collect_local_references(readme),
+        )
+
     def test_ignores_fenced_code_examples_inside_blockquotes(self):
         readme = """
 > Quoted example:
