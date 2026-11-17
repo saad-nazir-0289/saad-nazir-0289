@@ -84,6 +84,27 @@ Inline example: `[not a link](missing-inline.md)`.
 """
         self.assertEqual({"docs/real.md"}, collect_local_references(readme))
 
+    def test_ignores_image_alt_errors_inside_html_comments(self):
+        readme = """<!--
+<img src="hidden.svg">
+-->
+<img src="visible.svg">
+"""
+        self.assertEqual([4], find_images_without_alt(readme))
+
+    def test_removes_html_comments_before_processing_code_fences(self):
+        readme = """<!--
+```
+-->
+[Real link](docs/real.md)
+<img src="real.svg" alt="Real image">
+"""
+        self.assertEqual(
+            {"docs/real.md", "real.svg"},
+            collect_local_references(readme),
+        )
+        self.assertEqual([], find_images_without_alt(readme))
+
     def test_ignores_markdown_destinations_inside_html_comments(self):
         readme = """<!--
 [Old guide](missing-guide.md)

@@ -177,6 +177,11 @@ def _without_html_comments(readme_text: str) -> str:
     )
 
 
+def _visible_readme_text(readme_text: str) -> str:
+    """Remove HTML comments before code examples so hidden fences cannot affect parsing."""
+    return _without_code_examples(_without_html_comments(readme_text))
+
+
 def _is_escaped(text: str, index: int) -> bool:
     """Return whether the character at index is preceded by an odd backslash run."""
     backslashes = 0
@@ -374,7 +379,7 @@ def _local_path(destination: str) -> str | None:
 
 def collect_local_references(readme_text: str) -> set[str]:
     """Collect local paths from HTML attributes and Markdown links/images."""
-    readme_text = _without_html_comments(_without_code_examples(readme_text))
+    readme_text = _visible_readme_text(readme_text)
 
     parser = LocalReferenceParser()
     parser.feed(readme_text)
@@ -391,7 +396,7 @@ def collect_local_references(readme_text: str) -> set[str]:
 def find_images_without_alt(readme_text: str) -> list[int]:
     """Return line numbers for HTML image elements missing an alt attribute."""
     parser = MissingImageAltParser()
-    parser.feed(_without_code_examples(readme_text))
+    parser.feed(_visible_readme_text(readme_text))
     return parser.missing_alt_lines
 
 
