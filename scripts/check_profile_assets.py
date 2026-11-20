@@ -10,7 +10,6 @@ ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
 FENCE_OPEN_RE = re.compile(r" {0,3}(`{3,}|~{3,})")
 INLINE_CODE_RE = re.compile(r"(?<!`)(`+).*?(?<!`)\1(?!`)", re.DOTALL)
-HTML_COMMENT_RE = re.compile(r"<!--.*?(?:-->|$)", re.DOTALL)
 MARKDOWN_ESCAPABLE = re.compile(r"\\([\\`*_{}\[\]()#+\-.!<>|~])")
 
 
@@ -168,13 +167,121 @@ def _without_code_examples(readme_text: str) -> str:
 
 
 def _without_html_comments(readme_text: str) -> str:
-    """Remove HTML comments while preserving line positions."""
-    return HTML_COMMENT_RE.sub(
-        lambda match: "".join(
-            "\n" if char == "\n" else " " for char in match.group(0)
-        ),
-        readme_text,
-    )
+    """Remove HTML comments outside Markdown code while preserving line positions."""
+    inline_spans = {
+        match.start(): match.end()
+        for match in INLINE_CODE_RE.finditer(readme_text)
+    }
+    output: list[str] = []
+    in_comment = False
+    fence_char: str | None = None
+    fence_length = 0
+    fence_quote_depth = 0
+    indented_code_quote_depth: int | None = None
+    inline_code_end: int | None = None
+    previous_blank = True
+    offset = 0
+
+    for line in readme_text.splitlines(keepends=True):
+        content, quote_depth = _blockquote_content(line)
+        line_end = offset + len(line)
+
+        if not in_comment:
+            if fence_char is not None:
+                closing = re.match(
+                    rf" {{0,3}}{re.escape(fence_char)}{{{fence_length},}}[ \t]*(?:\r?\n)?$",
+                    content,
+                )
+                if quote_depth == fence_quote_depth and closing is not None:
+                    fence_char, fence_length, fence_quote_depth = None, 0, 0
+                inline_code_end = None
+                output.append(line)
+                previous_blank = False
+                offset = line_end
+                continue
+
+            if indented_code_quote_depth is not None:
+                is_blank = not content.strip()
+                is_indented = content.startswith("\t") or content.startswith("    ")
+                if quote_depth == indented_code_quote_depth and (is_blank or is_indented):
+                    inline_code_end = None
+                    output.append(line)
+                    previous_blank = is_blank
+                    offset = line_end
+                    continue
+                indented_code_quote_depth = None
+
+            opening = FENCE_OPEN_RE.match(content)
+            if opening:
+                fence = opening.group(1)
+                fence_char, fence_length = fence[0], len(fence)
+                fence_quote_depth = quote_depth
+                inline_code_end = None
+                output.append(line)
+                previous_blank = False
+                offset = line_end
+                continue
+
+            if previous_blank and (content.startswith("\t") or content.startswith("    ")):
+                indented_code_quote_depth = quote_depth
+                inline_code_end = None
+                output.append(line)
+                previous_blank = False
+                offset = line_end
+                continue
+
+        line_output: list[str] = []
+        index = 0
+        while index < len(line):
+            absolute_index = offset + index
+            if in_comment:
+                close = line.find("-->", index)
+                if close < 0:
+                    line_output.append(
+                        "".join(char if char in "\r\n" else " " for char in line[index:])
+                    )
+                    index = len(line)
+                    continue
+                line_output.append(
+                    "".join(char if char in "\r\n" else " " for char in line[index:close + 3])
+                )
+                index = close + 3
+                in_comment = False
+                continue
+
+            if inline_code_end is not None and absolute_index < inline_code_end:
+                visible_end = min(inline_code_end, line_end)
+                line_output.append(line[index:visible_end - offset])
+                index = visible_end - offset
+                if visible_end >= inline_code_end:
+                    inline_code_end = None
+                continue
+
+            span_end = inline_spans.get(absolute_index)
+            if span_end is not None:
+                visible_end = min(span_end, line_end)
+                line_output.append(line[index:visible_end - offset])
+                index = visible_end - offset
+                if span_end > line_end:
+                    inline_code_end = span_end
+                continue
+
+            if line.startswith("<!--", index):
+                line_output.append("    ")
+                index += 4
+                in_comment = True
+                continue
+
+            line_output.append(line[index])
+            index += 1
+
+        processed_line = "".join(line_output)
+        output.append(processed_line)
+        visible_content, _ = _blockquote_content(processed_line)
+        previous_blank = not visible_content.rstrip("\r\n").strip()
+        offset = line_end
+
+    return "".join(output)
 
 
 def _visible_readme_text(readme_text: str) -> str:

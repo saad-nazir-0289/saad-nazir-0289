@@ -105,6 +105,57 @@ Inline example: `[not a link](missing-inline.md)`.
         )
         self.assertEqual([], find_images_without_alt(readme))
 
+    def test_ignores_html_comment_markers_inside_inline_code(self):
+        readme = """Inline: `<!--` example.
+[Real link](docs/real.md)
+<img src="real.svg" alt="Real image">
+"""
+        self.assertEqual(
+            {"docs/real.md", "real.svg"},
+            collect_local_references(readme),
+        )
+        self.assertEqual([], find_images_without_alt(readme))
+
+    def test_ignores_html_comment_markers_inside_fenced_code(self):
+        readme = """```html
+<!-- not a real comment
+```
+[Real link](docs/real.md)
+<img src="real.svg" alt="Real image">
+"""
+        self.assertEqual(
+            {"docs/real.md", "real.svg"},
+            collect_local_references(readme),
+        )
+        self.assertEqual([], find_images_without_alt(readme))
+
+    def test_ignores_html_comment_markers_inside_indented_code(self):
+        readme = """Example:
+
+    <!-- not a real comment
+
+[Real link](docs/real.md)
+<img src="real.svg" alt="Real image">
+"""
+        self.assertEqual(
+            {"docs/real.md", "real.svg"},
+            collect_local_references(readme),
+        )
+        self.assertEqual([], find_images_without_alt(readme))
+
+    def test_ignores_html_comment_markers_inside_multiline_inline_code(self):
+        readme = """Inline: `code
+<!-- still code
+end`
+[Real link](docs/real.md)
+<img src="real.svg" alt="Real image">
+"""
+        self.assertEqual(
+            {"docs/real.md", "real.svg"},
+            collect_local_references(readme),
+        )
+        self.assertEqual([], find_images_without_alt(readme))
+
     def test_ignores_markdown_destinations_inside_html_comments(self):
         readme = """<!--
 [Old guide](missing-guide.md)
