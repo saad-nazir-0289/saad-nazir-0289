@@ -378,7 +378,8 @@ Inline example: `<img src="inline.svg">`.
             )
 
     def test_current_raster_assets_fit_the_size_budget(self):
-        self.assertEqual([], find_raster_asset_budget_violations(ROOT))
+        repository_root = Path(__file__).resolve().parents[1]
+        self.assertEqual([], find_raster_asset_budget_violations(repository_root))
 
     def test_root_relative_path_is_resolved_inside_repository(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
