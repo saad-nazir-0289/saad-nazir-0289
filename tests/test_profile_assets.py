@@ -8,6 +8,7 @@ from check_profile_assets import (
     collect_local_references,
     find_images_without_alt,
     find_missing_references,
+    find_raster_asset_budget_violations,
 )
 
 
@@ -354,6 +355,30 @@ Inline example: `<img src="inline.svg">`.
                     {"assets/logo.svg", "missing.md", "../outside.md"},
                 ),
             )
+
+    def test_enforces_per_file_and_aggregate_raster_asset_budgets(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            assets = root / "assets"
+            assets.mkdir()
+            (assets / "large.webp").write_bytes(b"x" * 101)
+            (assets / "small.gif").write_bytes(b"x" * 60)
+            (assets / "vector.svg").write_bytes(b"x" * 1000)
+
+            self.assertEqual(
+                [
+                    "assets/large.webp (101 bytes; per-file limit 100 bytes)",
+                    "Raster assets total 161 bytes; aggregate limit 150 bytes",
+                ],
+                find_raster_asset_budget_violations(
+                    root,
+                    max_file_bytes=100,
+                    max_total_bytes=150,
+                ),
+            )
+
+    def test_current_raster_assets_fit_the_size_budget(self):
+        self.assertEqual([], find_raster_asset_budget_violations(ROOT))
 
     def test_root_relative_path_is_resolved_inside_repository(self):
         with tempfile.TemporaryDirectory() as temporary_directory:

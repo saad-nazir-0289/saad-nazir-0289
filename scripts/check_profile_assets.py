@@ -11,6 +11,9 @@ README = ROOT / "README.md"
 FENCE_OPEN_RE = re.compile(r" {0,3}(`{3,}|~{3,})")
 INLINE_CODE_RE = re.compile(r"(?<!`)(`+).*?(?<!`)\1(?!`)", re.DOTALL)
 MARKDOWN_ESCAPABLE = re.compile(r"\\([\\`*_{}\[\]()#+\-.!<>|~])")
+RASTER_IMAGE_SUFFIXES = frozenset({".avif", ".gif", ".jpeg", ".jpg", ".png", ".webp"})
+MAX_RASTER_ASSET_BYTES = 2 * 1024 * 1024
+MAX_RASTER_ASSETS_TOTAL_BYTES = 3 * 1024 * 1024
 
 
 class LocalReferenceParser(HTMLParser):
@@ -524,6 +527,38 @@ def find_missing_references(root: Path, references: set[str]) -> list[str]:
     return missing
 
 
+def find_raster_asset_budget_violations(
+    root: Path,
+    *,
+    max_file_bytes: int = MAX_RASTER_ASSET_BYTES,
+    max_total_bytes: int = MAX_RASTER_ASSETS_TOTAL_BYTES,
+) -> list[str]:
+    """Return raster assets that exceed per-file or aggregate size budgets."""
+    assets_root = root / "assets"
+    if not assets_root.is_dir():
+        return []
+
+    image_sizes = [
+        (path, path.stat().st_size)
+        for path in sorted(assets_root.rglob("*"))
+        if path.is_file()
+        and not path.is_symlink()
+        and path.suffix.lower() in RASTER_IMAGE_SUFFIXES
+    ]
+
+    violations = [
+        f"{path.relative_to(root)} ({size} bytes; per-file limit {max_file_bytes} bytes)"
+        for path, size in image_sizes
+        if size > max_file_bytes
+    ]
+    total_bytes = sum(size for _, size in image_sizes)
+    if total_bytes > max_total_bytes:
+        violations.append(
+            f"Raster assets total {total_bytes} bytes; aggregate limit {max_total_bytes} bytes"
+        )
+    return violations
+
+
 def main() -> int:
     if not README.is_file():
         print(f"README not found: {README}")
@@ -533,8 +568,9 @@ def main() -> int:
     references = collect_local_references(readme_text)
     missing = find_missing_references(ROOT, references)
     missing_alt = find_images_without_alt(readme_text)
+    raster_budget_violations = find_raster_asset_budget_violations(ROOT)
 
-    if missing or missing_alt:
+    if missing or missing_alt or raster_budget_violations:
         if missing:
             print("Missing or unsafe local README references:")
             for reference in missing:
@@ -543,10 +579,15 @@ def main() -> int:
             print("README images missing alt attributes:")
             for line_number in missing_alt:
                 print(f"  - line {line_number}")
+        if raster_budget_violations:
+            print("Raster image asset size budget exceeded:")
+            for violation in raster_budget_violations:
+                print(f"  - {violation}")
         return 1
 
     print(f"Checked {len(references)} unique local README references; all exist.")
     print("All HTML image elements include alt attributes.")
+    print("Raster image assets fit within the per-file and aggregate size budgets.")
     return 0
 
 
