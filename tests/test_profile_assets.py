@@ -1,6 +1,7 @@
 import sys
 import tempfile
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -10,6 +11,29 @@ from check_profile_assets import (
     find_missing_references,
     find_raster_asset_budget_violations,
 )
+
+
+class PictureSourceCollector(HTMLParser):
+    """Collect source and image elements inside README picture elements."""
+
+    def __init__(self):
+        super().__init__()
+        self.pictures = []
+        self.current_picture = None
+
+    def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if tag == "picture":
+            self.current_picture = {"sources": [], "images": []}
+        elif self.current_picture is not None and tag == "source":
+            self.current_picture["sources"].append(attributes)
+        elif self.current_picture is not None and tag == "img":
+            self.current_picture["images"].append(attributes)
+
+    def handle_endtag(self, tag):
+        if tag == "picture" and self.current_picture is not None:
+            self.pictures.append(self.current_picture)
+            self.current_picture = None
 
 
 class ProfileAssetCheckerTests(unittest.TestCase):
@@ -386,6 +410,54 @@ Inline example: `<img src="inline.svg">`.
             root = Path(temporary_directory)
             (root / "logo.svg").write_text("svg", encoding="utf-8")
             self.assertEqual([], find_missing_references(root, {"/logo.svg"}))
+
+    def test_animated_project_previews_have_reduced_motion_fallbacks(self):
+        readme = (Path(__file__).resolve().parents[1] / "README.md").read_text(
+            encoding="utf-8"
+        )
+        parser = PictureSourceCollector()
+        parser.feed(readme)
+
+        expected = {
+            "assets/now/ucp-gate-vision.gif": {
+                (
+                    "(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)",
+                    "assets/now-gate-vision-dark.svg",
+                ),
+                (
+                    "(prefers-reduced-motion: reduce)",
+                    "assets/now-gate-vision-light.svg",
+                ),
+            },
+            "assets/now/agrivision.webp": {
+                (
+                    "(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)",
+                    "assets/now-agrivision-dark.svg",
+                ),
+                (
+                    "(prefers-reduced-motion: reduce)",
+                    "assets/now-agrivision-light.svg",
+                ),
+            },
+        }
+        found = set()
+
+        for picture in parser.pictures:
+            sources = {
+                (source.get("media"), source.get("srcset"))
+                for source in picture["sources"]
+            }
+            for image in picture["images"]:
+                animated_source = image.get("src")
+                if animated_source not in expected:
+                    continue
+                self.assertTrue(
+                    expected[animated_source].issubset(sources),
+                    f"{animated_source} needs light and dark reduced-motion fallbacks",
+                )
+                found.add(animated_source)
+
+        self.assertEqual(set(expected), found)
 
 
 if __name__ == "__main__":

@@ -69,8 +69,20 @@
 </picture>
 
 <p>
-  <a href="https://saadnazir.msndev.workers.dev/work/ucp-gate-vision/"><img src="assets/now/ucp-gate-vision.gif" width="49%" alt="Animated gate camera: a car is detected, its plate is read and logged, and a banned car is flagged." /></a>
-  <a href="https://saadnazir.msndev.workers.dev/work/agrivision/"><img src="assets/now/agrivision.webp" width="49%" alt="Animated satellite view: clouds hide the farms, a blurry daily image gets through, and AgriVision rebuilds a sharp crop-health map." /></a>
+  <a href="https://saadnazir.msndev.workers.dev/work/ucp-gate-vision/">
+    <picture>
+      <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/now-gate-vision-dark.svg" />
+      <source media="(prefers-reduced-motion: reduce)" srcset="assets/now-gate-vision-light.svg" />
+      <img src="assets/now/ucp-gate-vision.gif" width="49%" alt="Gate camera sequence: a car is detected, its plate is read and logged, and a banned car is flagged." />
+    </picture>
+  </a>
+  <a href="https://saadnazir.msndev.workers.dev/work/agrivision/">
+    <picture>
+      <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/now-agrivision-dark.svg" />
+      <source media="(prefers-reduced-motion: reduce)" srcset="assets/now-agrivision-light.svg" />
+      <img src="assets/now/agrivision.webp" width="49%" alt="Satellite sequence: clouds hide the farms, a blurry daily image gets through, and AgriVision rebuilds a sharp crop-health map." />
+    </picture>
+  </a>
 </p>
 <p>
   <a href="https://saadnazir.msndev.workers.dev/work/ucp-gate-vision/"><picture><source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset="assets/now-gate-vision-mobile-dark.svg" /><source media="(max-width: 700px)" srcset="assets/now-gate-vision-mobile-light.svg" /><source media="(prefers-color-scheme: dark)" srcset="assets/now-gate-vision-dark.svg" /><img src="assets/now-gate-vision-light.svg" width="49%" alt="UCP Gate Vision — computer vision, Tech Lead. Spots every car at three campus gates, reads its number plate, logs the entry, and flags banned vehicles. Takhleeq × UCP. Case study." /></picture></a>
