@@ -2,6 +2,7 @@ import sys
 import tempfile
 import unittest
 from html.parser import HTMLParser
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -458,6 +459,64 @@ Inline example: `<img src="inline.svg">`.
                 found.add(animated_source)
 
         self.assertEqual(set(expected), found)
+
+
+    def test_button_image_alt_text_matches_generated_svg_titles(self):
+        repository_root = Path(__file__).resolve().parents[1]
+        readme = (repository_root / "README.md").read_text(encoding="utf-8")
+        parser = PictureSourceCollector()
+        parser.feed(readme)
+
+        svg_namespace = "{http://www.w3.org/2000/svg}"
+        checked_buttons = set()
+
+        for picture in parser.pictures:
+            dark_sources = {
+                source.get("srcset") for source in picture["sources"]
+            }
+            for image in picture["images"]:
+                light_source = image.get("src", "")
+                if not (
+                    light_source.startswith("assets/btn-")
+                    and light_source.endswith("-light.svg")
+                ):
+                    continue
+
+                dark_source = light_source.replace("-light.svg", "-dark.svg")
+                self.assertIn(
+                    dark_source,
+                    dark_sources,
+                    f"{light_source} needs a matching dark-mode source",
+                )
+
+                labels = []
+                for source in (light_source, dark_source):
+                    svg_path = repository_root / source
+                    self.assertTrue(svg_path.is_file(), f"Missing {source}")
+                    svg_root = ET.parse(svg_path).getroot()
+                    title = svg_root.find(f"{svg_namespace}title")
+                    self.assertIsNotNone(title, f"{source} has no SVG title")
+                    label = "".join(title.itertext()).strip() if title is not None else ""
+                    self.assertTrue(label, f"{source} has an empty SVG title")
+                    labels.append(label)
+
+                self.assertEqual(
+                    labels[0],
+                    labels[1],
+                    f"{light_source} and {dark_source} have different labels",
+                )
+                self.assertEqual(
+                    labels[0],
+                    image.get("alt"),
+                    f"{light_source} README alt text does not match its SVG title",
+                )
+                checked_buttons.add(light_source)
+
+        self.assertGreater(
+            len(checked_buttons),
+            0,
+            "Expected to validate at least one generated button image",
+        )
 
 
 if __name__ == "__main__":
