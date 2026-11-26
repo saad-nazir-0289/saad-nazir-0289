@@ -145,4 +145,4 @@
   <a href="https://saadnazir.msndev.workers.dev/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/btn-website-dark.svg" /><img src="assets/btn-website-light.svg" width="164" height="50" alt="Visit the site" /></picture></a>
 </p>
 
-<sub>Lahore, Pakistan · Available remotely · Backup copy of my <a href="./Saad-Nazir-Resume.pdf">résumé</a></sub>
+<sub>Lahore, Pakistan · Backup copy of my <a href="./Saad-Nazir-Resume.pdf">résumé</a></sub>
