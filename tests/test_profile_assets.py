@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from check_profile_assets import (
     collect_local_references,
     find_images_without_alt,
+    find_invalid_svg_references,
     find_missing_references,
     find_raster_asset_budget_violations,
 )
@@ -379,6 +380,50 @@ Inline example: `<img src="inline.svg">`.
                     root,
                     {"assets/logo.svg", "missing.md", "../outside.md"},
                 ),
+            )
+
+    def test_validates_referenced_svg_documents(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            assets = root / "assets"
+            assets.mkdir()
+            (assets / "valid.svg").write_text(
+                '<svg xmlns="http://www.w3.org/2000/svg"><title>Valid</title></svg>',
+                encoding="utf-8",
+            )
+            (assets / "broken.svg").write_text(
+                "<svg><path></svg>",
+                encoding="utf-8",
+            )
+            (assets / "wrong-root.svg").write_text("<html/>", encoding="utf-8")
+            (assets / "unused.svg").write_text("<svg>", encoding="utf-8")
+            (assets / "directory.svg").mkdir()
+
+            violations = find_invalid_svg_references(
+                root,
+                {
+                    "assets/valid.svg",
+                    "assets/broken.svg",
+                    "assets/wrong-root.svg",
+                    "assets/directory.svg",
+                    "assets/missing.svg",
+                    "notes.md",
+                },
+            )
+
+            self.assertEqual(3, len(violations))
+            self.assertTrue(
+                violations[0].startswith(
+                    "assets/broken.svg (invalid SVG XML:"
+                )
+            )
+            self.assertEqual(
+                "assets/directory.svg (not a regular file)",
+                violations[1],
+            )
+            self.assertEqual(
+                "assets/wrong-root.svg (root element is not <svg>)",
+                violations[2],
             )
 
     def test_enforces_per_file_and_aggregate_raster_asset_budgets(self):

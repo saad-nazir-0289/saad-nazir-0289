@@ -2,6 +2,7 @@
 """Check local README references and HTML image alt attributes."""
 
 import re
+import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -527,6 +528,37 @@ def find_missing_references(root: Path, references: set[str]) -> list[str]:
     return missing
 
 
+def find_invalid_svg_references(root: Path, references: set[str]) -> list[str]:
+    """Return referenced SVG files that are not well-formed SVG documents."""
+    root = root.resolve()
+    invalid: list[str] = []
+
+    for reference in sorted(references):
+        if Path(reference).suffix.lower() != ".svg":
+            continue
+
+        candidate = (root / reference.lstrip("/")).resolve()
+        try:
+            candidate.relative_to(root)
+        except ValueError:
+            continue
+        if not candidate.is_file():
+            if candidate.exists():
+                invalid.append(f"{reference} (not a regular file)")
+            continue
+
+        try:
+            svg_root = ET.parse(candidate).getroot()
+        except (ET.ParseError, OSError, UnicodeError) as exc:
+            invalid.append(f"{reference} (invalid SVG XML: {exc})")
+            continue
+
+        if svg_root.tag not in {"svg", "{http://www.w3.org/2000/svg}svg"}:
+            invalid.append(f"{reference} (root element is not <svg>)")
+
+    return invalid
+
+
 def find_raster_asset_budget_violations(
     root: Path,
     *,
@@ -568,9 +600,10 @@ def main() -> int:
     references = collect_local_references(readme_text)
     missing = find_missing_references(ROOT, references)
     missing_alt = find_images_without_alt(readme_text)
+    invalid_svgs = find_invalid_svg_references(ROOT, references)
     raster_budget_violations = find_raster_asset_budget_violations(ROOT)
 
-    if missing or missing_alt or raster_budget_violations:
+    if missing or missing_alt or invalid_svgs or raster_budget_violations:
         if missing:
             print("Missing or unsafe local README references:")
             for reference in missing:
@@ -579,14 +612,20 @@ def main() -> int:
             print("README images missing alt attributes:")
             for line_number in missing_alt:
                 print(f"  - line {line_number}")
+        if invalid_svgs:
+            print("Invalid local SVG assets:")
+            for violation in invalid_svgs:
+                print(f"  - {violation}")
         if raster_budget_violations:
             print("Raster image asset size budget exceeded:")
             for violation in raster_budget_violations:
                 print(f"  - {violation}")
         return 1
 
+    svg_count = sum(Path(reference).suffix.lower() == ".svg" for reference in references)
     print(f"Checked {len(references)} unique local README references; all exist.")
     print("All HTML image elements include alt attributes.")
+    print(f"Checked {svg_count} referenced SVG assets; all are well-formed.")
     print("Raster image assets fit within the per-file and aggregate size budgets.")
     return 0
 
